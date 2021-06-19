@@ -12,7 +12,9 @@ layout = html.Div(children=[
     html.Div(children='''
         An awesome webapp that lets you explore the carbondioxide emissions of buildings.
     '''),
-    dcc.Link(href="/views/location_view")
+    dcc.Link('Location', href="/views/location_view"),
+    html.Br(),
+    dcc.Link('About Us', href="/views/about_us_view")
 ])
 
 if __name__ == '__main__':

@@ -5,7 +5,6 @@ from dash.dependencies import Input, Output, State
 
 from app import app
 
-
 from models.building import location
 #from models.building import weather
 

@@ -3,7 +3,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 from app import app, server
-from views import home_view  ,location_view
+from views import home_view  ,location_view, about_us_view
 from controllers import location_controller
 
 
@@ -20,6 +20,8 @@ def display_page(pathname):
         return home_view.layout
     elif pathname == '/views/location_view':
         return location_view.layout
+    elif pathname == '/views/about_us_view':
+        return about_us_view.layout
     else:
         return '404'
 
