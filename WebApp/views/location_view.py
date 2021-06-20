@@ -15,7 +15,9 @@ layout = html.Div(children=[
     '''),
     dcc.Input(id="input", type="text", placeholder="Enter post code", value = ''),
     html.Button(children = 'Submit', id="submit_button", n_clicks=0),
-    html.Div(id='location_output',children='')
+    html.Div(id='location_output',children=''),
+    html.Br(),
+    dcc.Link('Home', href="/"), # link to landing page
 ])
 
 if __name__ == '__main__':
