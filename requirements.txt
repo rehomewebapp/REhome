@@ -2,4 +2,3 @@ gunicorn
 dash
 dash_leaflet
 geopy
-csv
