@@ -10,7 +10,7 @@ from models.building import location
     State('input','value')
 )
 def handle_location(n_clicks, value):
-    #print('hello from handle_location')
+    print('hello from handle_location')
     if n_clicks == 0:
         return ''
     loc = location.conv_zip_to_location(value)

@@ -5,6 +5,16 @@ import dash_leaflet as dl
 
 from app import app
 
+dummy_pos = [0, 0] # Initial position for marker, polyline and polygon
+
+# Marker icon
+icon = {
+    "iconUrl": '/assets/bullseye.png',
+    "iconSize": [48, 48],  # Size of the icon
+    "iconAnchor": [24, 24],  # Anchor of the icon 
+}
+
+
 # VIEW
 
 layout = html.Div(children=[
@@ -13,12 +23,10 @@ layout = html.Div(children=[
     dl.Map(id = "floorplan_map",
         children=[
                 dl.TileLayer(maxZoom = 21, maxNativeZoom = 19), # 
-                dl.MeasureControl(
-                    position="topleft", 
-                    primaryLengthUnit="meters", 
-                    primaryAreaUnit="sqmeters", 
-                    activeColor="#214097", 
-                    completedColor="#972158")],
+                dl.Marker(id="marker_id", position = dummy_pos, icon=icon, interactive=False), # Start Marker
+                dl.Polyline(id="polyline-id", positions=[dummy_pos]),  # Create a polyline
+                dl.Polygon(id="polygon-id", positions=[dummy_pos]),  # Create a polygon
+            ],
         style={'width': '1000px', 'height': '500px'}
     ),
     dcc.Link('Home', href="/"), # link to landing page
