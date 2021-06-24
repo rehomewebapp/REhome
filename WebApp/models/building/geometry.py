@@ -4,6 +4,16 @@ geometry of a building. Output should consist of all opaque and transparent
 areas, their types (roof, outside_wall, window) and their orientations.
 """
 
+from area import area
+
+def floorplane_from_geopolygone(polygone):
+    """Calculate the area of a geopolygone.
+    """
+    obj = {'type':'Polygon','coordinates':[polygone]}
+    a = round(area(obj),2)
+
+    return a
+
 class Geometry():
     def __init__(self, width, length, story_height, stories, roof_type):
         self.width = width
@@ -15,10 +25,12 @@ class Geometry():
         self.volume = width * length * story_height * stories
 
     def _floorplane_from_width_and_length(self):
-        """ calculate the floor area and create a list of all floor lines
+        """ Calculate the area and create a list of all floor lines
         """
         area = self.width * self.length
         return area
+
+
 
     def _walls_from_floor_and_stories(floor : float,
                                 story_height: float,

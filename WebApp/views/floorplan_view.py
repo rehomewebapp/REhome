@@ -29,6 +29,7 @@ layout = html.Div(children=[
             ],
         style={'width': '1000px', 'height': '500px'}
     ),
+    html.Div(id = "area_output", children=""),
     dcc.Link('Home', href="/"), # link to landing page
 ])
 
