@@ -38,12 +38,12 @@ def update_polyline_and_polygon(click_lat_lng, positions):
         return [click_lat_lng], [dummy_pos], start_marker_position, ""
     # If the click is close to the first point, close the polygon, 
     # and hide the marker.
-    print(click_lat_lng)
+    #print(click_lat_lng)
     dist2 = (positions[0][0] - click_lat_lng[0]) ** 2 + (positions[0][1] - click_lat_lng[1]) ** 2
     if dist2 < dlatlon2:
         area = floorplane_from_geopolygone(positions)
-        print('done')
-        return [dummy_pos], positions, [0,0], area # last return sets marker somewhere invisible
+        #print('done')
+        return [dummy_pos], positions, [0,0], f"{area=}m^2" # last return sets marker somewhere invisible
     # Otherwise, append the click position.
     positions.append(click_lat_lng)
     return positions, [dummy_pos], positions[0], ""

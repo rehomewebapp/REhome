@@ -21,7 +21,7 @@ class TestGeometry(unittest.TestCase):
             [48.00613200375274, 8.037684559822084],
         ]
         area = floorplane_from_geopolygone(polygone)
-        self.assertEqual(area,320.61)
+        self.assertEqual(area,216.78)
 
 if __name__ == '__main__':
     unittest.main()

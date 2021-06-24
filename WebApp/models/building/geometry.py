@@ -4,15 +4,17 @@ geometry of a building. Output should consist of all opaque and transparent
 areas, their types (roof, outside_wall, window) and their orientations.
 """
 
-from area import area
+from pyproj import Geod
 
 def floorplane_from_geopolygone(polygone):
     """Calculate the area of a geopolygone.
     """
-    obj = {'type':'Polygon','coordinates':[polygone]}
-    a = round(area(obj),2)
+    # split polygone into list with lats and lons
+    lats , lons = map(list, zip(*polygone))
+    geod = Geod(ellps="WGS84")
+    area = geod.polygon_area_perimeter(lons,lats)[0]
 
-    return a
+    return round(abs(area),2)
 
 class Geometry():
     def __init__(self, width, length, story_height, stories, roof_type):
