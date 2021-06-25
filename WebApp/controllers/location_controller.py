@@ -15,7 +15,7 @@ def handle_location(n_clicks, value):
         return ''
     loc = location.conv_zip_to_location(value)
     if loc == None:
-        return f'Sorry we could not set up a building for that location.'
+        return f'Sorry we could not find that location.'
     try:
         location.save_location_data(loc)
     except:
@@ -23,7 +23,7 @@ def handle_location(n_clicks, value):
         pass
     city = loc['city']
     #data = weather.get_weather(loc)
-    return f'Your building will be placed in {city}.'
+    return ""
 
 if __name__ == '__main__':
     app.run_server(debug=True)

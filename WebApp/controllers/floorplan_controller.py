@@ -10,9 +10,11 @@ from models.building.geometry import floorplane_from_geopolygone
 @app.callback(
     Output('floorplan_map','center'),
     Output('floorplan_map','zoom'),
-    Input('floorplan_heading','n_clicks'),
+    Input('submit_button','n_clicks'),
 )
 def set_latlng(n_clicks):
+    if n_clicks == 0:
+        raise PreventUpdate()
     #print('hello from set_latlng')
     loc = location.read_location_data()
     center = [float(loc['latitude']),float(loc['longitude'])]
