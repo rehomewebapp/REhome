@@ -10,7 +10,7 @@ from models.building import location
     State('input','value')
 )
 def handle_location(n_clicks, value):
-    print('hello from handle_location')
+    #print('hello from handle_location')
     if n_clicks == 0:
         return ''
     loc = location.conv_zip_to_location(value)
@@ -19,7 +19,8 @@ def handle_location(n_clicks, value):
     try:
         location.save_location_data(loc)
     except:
-        print("could not save location.")
+        #print("could not save location.")
+        pass
     city = loc['city']
     #data = weather.get_weather(loc)
     return f'Your building will be placed in {city}.'
