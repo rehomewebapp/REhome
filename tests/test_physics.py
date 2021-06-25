@@ -11,11 +11,11 @@ class TestBuildingPhysics(unittest.TestCase):
     def test_infAndVent(self):
         self.assertEqual(physics.infAndVent(n=0.5,volume=3600,tempIn=20,tempAmb=10),6875)
 
-    def test_energyBalance(self):
-        self.assertEqual(physics.energyBalance(gains=[10,100], losses=[10,100]),0)
+    def test_heatDemand(self):
+        self.assertEqual(physics.heatDemand(gains=[10,100], losses=[10,100]),0)
 
-    def test_energyBalanceWithEmptyList(self):
-        self.assertEqual(physics.energyBalance(gains=[10,100]),-110)
+    def test_heatDemandWithEmptyList(self):
+        self.assertEqual(physics.heatDemand(gains=[10,100]),-110)
 
 if __name__ == '__main__':
     unittest.main()
