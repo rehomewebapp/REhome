@@ -1,0 +1,45 @@
+models.building package
+=======================
+
+Submodules
+----------
+
+models.building.geometry module
+-------------------------------
+
+.. automodule:: models.building.geometry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+models.building.location module
+-------------------------------
+
+.. automodule:: models.building.location
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+models.building.physics module
+------------------------------
+
+.. automodule:: models.building.physics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+models.building.weather module
+------------------------------
+
+.. automodule:: models.building.weather
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: models.building
+   :members:
+   :undoc-members:
+   :show-inheritance:
