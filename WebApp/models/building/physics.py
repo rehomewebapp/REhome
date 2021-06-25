@@ -4,84 +4,112 @@ HEATCAPAIR = 1100 # J/kgK  specific heat capacity of air
 
 
 def transmission(uValue, area, tempIn, tempAmb):
-    '''Calculate the transmission losses through a construction element.
+    """Calculate transmission losses through a plane.
 
+    Parameters
+    ----------
+    uValue : float
+        Heat transfer coefficient :math:`U~[W/m^2K]`
+    area : float
+        Area of the plane :math:`A~[m^2]`
+    tempIn : float
+        Temperature inside of the plane :math:`T_{in}~[°C]`
+    tempAmb : float
+        Temperature outside of the plane :math:`T_{amb}~[°C]`
+
+    Returns
+    -------
+    float
+        Heatflow through the plane :math:`\dot{Q}~[W]`
+
+    Notes
+    -----
     .. math::
-
-        \{Q} = U \cdot A \cdot (T_{in} - T_{amb})
-
-    :param uValue: Heat transfer coefficient :math:`U` [W/m^2K]
-    :type uValue: float
-    :param area: Area of the construction element :math:`A` [m^2]
-    :type area: float
-    :param tempIn: Temperature inside of the const. element :math: `T_{in}` [°C]
-    :type tempIn: float
-    :param tempAmb: Temperature outside of the const. element :math: `T_{amb}` [°C]
-    :type tempAmb: float
-    :return: Heatflow through the construction element :math: `\dot{Q}` [W]
-    :rtype: float
-    '''
+        \dot{Q} = U \cdot A \cdot (T_{in} - T_{amb})
+    """
 
     heatFlow = uValue * area * (tempIn - tempAmb)
     return heatFlow
 
 
 def solarGains(gValue, area, irrad):
-    '''Calculate the solar gains through a transparent construction element.
+    """Calculate the solar gains through a transparent plane.
 
+    Parameters
+    ----------
+    gValue : float
+        Solar heat gain coefficient :math:`g~[-]`
+    area : float
+        Area of the plane :math:`A~[m^2]`
+    irrad : float
+        Global irradiation perpendicular to the plane :math:`G_{n}~[W/m^2]`
+
+    Returns
+    -------
+    float
+        Heatflow through the plane :math:`\dot{Q}~[W]`
+
+    Notes
+    -----
     .. math::
+        \dot{Q} = g \cdot A \cdot G_{n}
+    """
 
-        \{Q} = g \cdot A \cdot G_{n}
-
-    :param gValue: Solar heat gain coefficient :math:`g` [-]
-    :type gValue: float
-    :param area: Area of the construction element :math:`A` [m^2]
-    :type area: float
-    :param irrad: irradiation perpendicular to the construction element :math: `G_{n}` [W/m^2]
-    :type irrad: float
-    :return: Heatflow through the construction element :math: `\dot{Q}` [W]
-    :rtype: float
-    '''
 
     heatFlow = gValue * area * irrad
     return heatFlow
 
 def infAndVent(n, volume, tempIn, tempAmb):
-    '''Calculate the infiltration and/or ventilation losses of a volume.
+    r"""Calculate the infiltration and/or ventilation losses of a volume.
 
+    Parameters
+    ----------
+    n : float
+        Ventilation/Infiltration rate :math:`n~[1/h]`
+    volume : float
+        Volume of the construction element :math:`V~[m^3]`
+    tempIn : float
+        Temperature inside of the volume :math:`T_{in}~[°C]`
+    tempAmb : float
+        Temperature outside of the volume :math:`T_{amb}~[°C]`
+
+    Returns
+    -------
+    float
+        Heatflow through the construction element :math:`\dot{Q}~[W]`
+
+    Notes
+    -----
     .. math::
-
         \dot{Q} = n \cdot V \cdot \rho \cdot c_{P,air} \cdot (T_{in} - T_{amb})
+    """
 
-    :param n: Ventilation/Infiltration rate :math:`n` [1/h]
-    :type n: float
-    :param volume: Volume of the construction element :math:`V` [m^3]
-    :type volume: float
-    :param tempIn: Temperature inside of the volume :math: `T_{in}` [°C]
-    :type tempIn: float
-    :param tempAmb: Temperature outside of the volume :math: `T_{amb}` [°C]
-    :type tempAmb: float
-    :return: Heatflow through the construction element :math: `\dot{Q}` [W]
-    :rtype: float
-    '''
 
     heatFlow = n * volume * DENSITYAIR * HEATCAPAIR * (tempIn - tempAmb) / 3600
     return heatFlow
 
-def energyBalance(gains = [], losses = []):
-    '''Calculate the energy balance.
+def heatDemand(gains = [], losses = []):
+    """Calculate the heating or cooling demand using an energy balance.
 
+    Parameters
+    ----------
+    gains : list of float
+        All heat gains of the building.  :math:`Q_{gain}~[Wh]`
+    losses : list of float
+        All heat losses of the building.  :math:`Q_{loss}~[Wh]`
+
+    Returns
+    -------
+    float
+        Heating (+) or cooling (-) demand. :math:`{Q}~[Wh]`
+
+    Notes
+    -----
     .. math::
-
         Q = \sum{Q_{loss} - \sum{Q_{gain}}}
+    """
 
-    :param gains: All heat gains of the building. [Wh]
-    :type gains: list (float)
-    :param losses: All heat losses of the building. [Wh]
-    :type losses: list (float)
-    :return: Heating (+)/Cooling (-) demand. [Wh] 
-    :rtype: float
-    '''
+
     sum = 0
     for gain in gains:
         sum -= gain
