@@ -1,6 +1,8 @@
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
+
+from views.templates.footer import footer
 from views.templates.header import create_navbar
 
 # every child page has a layout as shown below and can be run via the code index.py 
@@ -14,4 +16,5 @@ layout = html.Div(children=[
     html.Br(),
     html.P("We are a team of students who want to save the world."),
     html.Img(src=ABOUT_US),
+    footer,
 ])
