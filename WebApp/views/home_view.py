@@ -60,7 +60,7 @@ step_3 = dbc.Row(children=[
     dbc.Col(children=[
         html.H2(children=["Step 3"]),
         html.H1(children=["REnew your energy supply system"]),
-        html.P("to meet your energy demand in REnewable way and minimize your CO2 footprint."),
+        html.P("to meet your energy demand in a REnewable way and minimize your CO2 footprint."),
     ], style={"text-align" : "right"}),
     dbc.Col(html.Img(src=STEP3,height = "200px")),
 ])
