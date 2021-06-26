@@ -7,9 +7,11 @@ from views.templates.header import create_navbar
 # https://dash.plotly.com/introduction please go through this link to add more features in these cases
 
 navbar = create_navbar("About Us")
+ABOUT_US = "/assets/about_us.png"
 
 layout = html.Div(children=[
     navbar,
-    html.H1(children="About Us"),
-
+    html.Br(),
+    html.P("We are a team of students who want to save the world."),
+    html.Img(src=ABOUT_US),
 ])
