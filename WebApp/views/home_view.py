@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 
 from app import app
 
-from views.templates.header import navbar
+from views.templates.header import create_navbar
 from views.templates.footer import footer
 
 # VIEW
@@ -21,6 +21,8 @@ content = dbc.Jumbotron(
         html.P(dbc.Button("START", color="primary", href="views/location_view"), className="lead"),
     ], style={"margin-bottom":"0rem","padding-bottom":"10rem"}
 )
+
+navbar = create_navbar("home")
 
 layout = html.Div(children=[
     navbar,

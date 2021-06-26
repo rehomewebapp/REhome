@@ -1,10 +1,11 @@
 import dash
+from dash_bootstrap_components._components.Row import Row
 import dash_html_components as html
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_leaflet as dl
 
-from views.templates.header import navbar
+from views.templates.header import create_navbar
 from views.templates.sidebar import sidebar
 from views.templates.footer import footer
 
@@ -14,8 +15,6 @@ from app import app
 
 # CREATE THE USER INPUT 
 
-CONTENT_STYLE = {"margin-left": "9rem"}
-
 content_1 = html.Div(children=[
     html.Div(children='''
         Where is your building located?
@@ -23,7 +22,7 @@ content_1 = html.Div(children=[
     dcc.Input(id="input", type="text", placeholder="Enter post code", value = ''),
     dbc.Button("Search", id="submit_button", className='',  n_clicks=0),
     html.Div(id='location_output',children=''),
-], style=CONTENT_STYLE)
+])
 
 
 
@@ -48,18 +47,26 @@ content_2 = html.Div(children=[
                 dl.Polyline(id="polyline-id", positions=[dummy_pos]),  # Create a polyline
                 dl.Polygon(id="polygon-id", positions=[dummy_pos]),  # Create a polygon
             ],
-        style={'width': '1000px', 'height': '500px'}
+        #style={'width': '1000px', 'height': '500px'}
+        style={'width': '100%', 'height': '50vh', 'margin': "auto","padding-right":"15px", "display": "block", "position": "relative"}
     ),
     html.Div(id = "area_output", children=""),
-], style=CONTENT_STYLE)
+])
 
-
+navbar = create_navbar("Building > Location")
 
 layout = html.Div(children=[
     navbar,
-    sidebar,
-    content_1,
-    content_2,
+    html.Div([
+        dbc.Row([
+            dbc.Col(sidebar,width = 2),
+            dbc.Col([
+                content_1,
+                content_2,
+            ],width=10,style={"padding-left":"0px"})
+        ],style={"margin-right":"0px"}),
+    ]),
+    html.Hr(),
     footer,
 ])
 

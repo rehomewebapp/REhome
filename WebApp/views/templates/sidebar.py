@@ -1,36 +1,47 @@
 import dash
+from dash_bootstrap_components._components.NavItem import NavItem
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
 
-# the style arguments for the sidebar. We use position:fixed and a fixed width
-SIDEBAR_STYLE = {
-    "position": "fixed",
-    "top": 52,
-    "left": 0,
-    "bottom": 0,
-    "width": "8rem",
-    "height": "100%",
-    "z-index": 1,
-    "overflow-x": "hidden",
-    "transition": "all 0.5s",
-    #"padding": "0.5rem 1rem",
-    #"color": "secondary",
-    "background-color": "#eee",
-}
+CHEVRON_UP = "/assets/chevron-up.svg"
+CHEVRON_DOWN = "/assets/chevron-down.svg"
 
 sidebar = html.Div(
     [
         dbc.Nav(
-            [
-                dbc.NavLink("Building", href="/page-1", id="page-1-link"),
-                dbc.NavLink("Renovation", href="/page-2", id="page-2-link"),
-                dbc.NavLink("System", href="/page-3", id="page-3-link"),
+            [   
+                dbc.NavItem(
+                    dbc.Row([   
+                        dbc.Col(dbc.NavLink("Building", href="/views/location_view"),width=8),
+                        dbc.Col(html.Img(src=CHEVRON_UP)),
+                    ],align="center"), active=True,
+                ),
+                dbc.NavItem(dbc.NavLink("  Location", href="/views/location_view",active=True)),
+                dbc.NavItem(dbc.NavLink("  Geometry",href="/?", disabled=True),),
+                dbc.NavItem(dbc.NavLink("  Materials",href="/?", disabled=True),),
+                dbc.NavItem(dbc.NavLink("  Occupancy",href="/?", disabled=True),),
+                #html.Hr(className="my-1"),
+                dbc.NavItem(
+                    dbc.Row([   
+                        dbc.Col(dbc.NavLink("Renovation", href="/page-2", id="page-2-link"),width=8),
+                        dbc.Col(html.Img(src=CHEVRON_DOWN)),
+                    ],align="center"), active=False,
+                ),
+                #dbc.NavItem(dbc.NavLink("Renovation", href="/page-2", id="page-2-link")),
+                #html.Hr(className="my-1"),
+                dbc.NavItem(
+                    dbc.Row([   
+                        dbc.Col(dbc.NavLink("System", href="/page-3", id="page-3-link"),width=8),
+                        dbc.Col(html.Img(src=CHEVRON_DOWN)),
+                    ],align="center"), active=False,
+                ),
+                #dbc.NavItem(dbc.NavLink("System", href="/page-3", id="page-3-link")),
             ],
+            #className="secondary",
             vertical=True,
             pills=True,
         ),
-    ],
+    ],style={"background-color":"#eee"},
     id="sidebar",
-    style=SIDEBAR_STYLE,
 )

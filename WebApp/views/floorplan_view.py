@@ -4,7 +4,7 @@ import dash_core_components as dcc
 import dash_leaflet as dl
 
 from app import app
-from views.templates.header import navbar
+from views.templates.header import create_navbar
 
 dummy_pos = [0, 0] # Initial position for marker, polyline and polygon
 
@@ -17,6 +17,7 @@ icon = {
 
 
 # VIEW
+navbar = create_navbar("Floorplan")
 
 layout = html.Div(children=[
     navbar,
