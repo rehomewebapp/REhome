@@ -17,6 +17,7 @@ content = html.Div([
     html.Br(),
     html.P("We are a team of students who want to save the world (:"),
     html.Img(src=ABOUT_US),
+    html.P("Have fun with our WebApp!"),
 ])
 
 layout = html.Div(children=[
