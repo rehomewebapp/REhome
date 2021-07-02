@@ -3,7 +3,7 @@ from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
 from models.building import location
-from models.building.geometry import floorplane_from_geopolygone
+from models.building.geometry import floorplane_from_geopolygone, save_geometry_data, perimeter_from_geopolygone
 
 
 # callback to center location
@@ -43,7 +43,9 @@ def update_polyline_and_polygon(click_lat_lng, positions):
     #print(click_lat_lng)
     dist2 = (positions[0][0] - click_lat_lng[0]) ** 2 + (positions[0][1] - click_lat_lng[1]) ** 2
     if dist2 < dlatlon2:
+        perimeter = perimeter_from_geopolygone(positions)
         area = floorplane_from_geopolygone(positions)
+        save_geometry_data(perimeter, area)
         #print('done')
         return [dummy_pos], positions, [0,0], f"{area=}m^2" # last return sets marker somewhere invisible
     # Otherwise, append the click position.
