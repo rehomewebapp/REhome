@@ -6,10 +6,11 @@ import dash_bootstrap_components as dbc
 
 from views.templates.footer import footer
 from views.templates.header import create_navbar
-from views.templates.sidebar import sidebar
+from views.templates.sidebar import create_sidebar
 
 navbar = create_navbar("Materials")
 
+sidebar = create_sidebar("materials")
 input = dbc.Row(
     [
         dbc.Col(

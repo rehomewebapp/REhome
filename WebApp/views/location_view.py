@@ -6,7 +6,7 @@ import dash_bootstrap_components as dbc
 import dash_leaflet as dl
 
 from views.templates.header import create_navbar
-from views.templates.sidebar import sidebar
+from views.templates.sidebar import create_sidebar
 from views.templates.footer import footer
 
 #from dash_html_components.Button import Button
@@ -54,6 +54,7 @@ content_2 = html.Div(children=[
 ])
 
 navbar = create_navbar("Building > Location")
+sidebar = create_sidebar("location")
 
 layout = html.Div(children=[
     navbar,

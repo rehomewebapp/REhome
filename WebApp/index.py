@@ -23,9 +23,9 @@ app.layout = html.Div([
 def display_page(pathname):
     if pathname == '/':
         return home_view.layout
-    elif pathname == '/views/location_view':
+    elif pathname == '/location':
         return location_view.layout
-    elif pathname == '/views/about_us_view':
+    elif pathname == '/about_us':
         return about_us_view.layout
     elif pathname == '/floorplan':
         return floorplan_view.layout
