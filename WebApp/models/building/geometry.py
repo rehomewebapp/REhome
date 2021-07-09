@@ -44,16 +44,28 @@ def save_geometry_data(perimeter, area):
     """
     geometry = {'perimeter':perimeter, 'area':area}
     with open(data_path + "userid_geometry.csv", 'w') as csvfile:
-        fieldnames = ['perimeter', 'area']
+        fieldnames = ['perimeter', 'groundArea']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerow(geometry)
 
-def read_geometry_data():
+def read_geometry_data(filename):
+
+    """Load the geometry data from a csv file.
+
+    Parameters
+    ----------
+    filename : string
+        filename of the csv file containing the geometry data
+
+    Returns
+    -------
+    dict containing
+        - groundArea (float): Ground area of the building [m^2]
+        - perimeter (float): Perimeter of the building [m]
     """
-    load the geometry data from a csv file.
-    """
-    with open(data_path + "userid_geometry.csv") as csvfile:
+
+    with open(data_path + filename) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             geometry = row

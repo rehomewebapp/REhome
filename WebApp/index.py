@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 
 from app import app, server
 from views import home_view  ,location_view, about_us_view, floorplan_view, geometry_view, materials_view
-from controllers import location_controller, floorplan_controller, geometry_controller
+from controllers import location_controller, floorplan_controller, geometry_controller, materials_controller
 
 # this sets the layout of our webpage, dcc.location sets the url of the page, 
 # and html.div returns the page content of all the child pages of our web app

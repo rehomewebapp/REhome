@@ -24,7 +24,7 @@ content_1 = dbc.Jumbotron(
             className="lead",
         ),
         html.Hr(className="my-2"),
-        html.P(dbc.Button("START", color="primary", href="views/location_view"), className="lead"),
+        html.P(dbc.Button("START", color="primary", href="location"), className="lead"),
     ], style={"margin-bottom":"0rem","padding-bottom":"10rem"}
 )
 
