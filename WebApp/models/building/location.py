@@ -17,8 +17,8 @@ def read_location_data():
     return location
 
 
-if __name__ == "__main__":
-    location = conv_zip_to_location(79271)
+
+
     #print(location)
     #print(os.getcwd())
     #save_location_data(location)
