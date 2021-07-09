@@ -17,5 +17,8 @@ class TestBuildingPhysics(unittest.TestCase):
     def test_heatDemandWithEmptyList(self):
         self.assertEqual(physics.heatDemand(gains=[10,100]),-110)
 
+    def test_heatflow2Energy(self):
+        self.assertEqual(physics.heatflow2Energy(heatflow=10,timestep=1),10)
+
 if __name__ == '__main__':
     unittest.main()

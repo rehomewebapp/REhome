@@ -116,3 +116,28 @@ def heatDemand(gains = [], losses = []):
     for loss in losses:
         sum += loss
     return sum
+
+
+def heatflow2Energy(heatflow, timestep):
+    """Calculate the resulting energy of a heatflow in a certain timestep.
+
+    Parameters
+    ----------
+    heatflow : float
+        Heatflow.  :math:`\dot{Q}~[W]`
+    timestep : float
+        Timestep.  :math:`\Delta t~[h]`
+
+    Returns
+    -------
+    float
+        Energy. :math:`Q~[Wh]`
+
+    Notes
+    -----
+    .. math::
+        Q = \dot{Q} \cdot \Delta t
+    """
+
+    energy = heatflow * timestep
+    return energy
