@@ -26,3 +26,11 @@ Physics
    :members:
    :undoc-members:
    :show-inheritance:
+
+Utilities
+---------
+
+.. automodule:: building.utilities
+   :members:
+   :undoc-members:
+   :show-inheritance:
