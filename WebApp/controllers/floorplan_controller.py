@@ -45,7 +45,7 @@ def update_polyline_and_polygon(click_lat_lng, positions):
     if dist2 < dlatlon2:
         perimeter = perimeter_from_geopolygone(positions)
         area = floorplane_from_geopolygone(positions)
-        save_geometry_data(perimeter, area)
+        #save_geometry_data(perimeter, area)
         #print('done')
         return [dummy_pos], positions, [0,0], f"{area=}m^2" # last return sets marker somewhere invisible
     # Otherwise, append the click position.

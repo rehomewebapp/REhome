@@ -13,7 +13,8 @@ def handle_facade(n_storys, story_height):
     if n_storys == None or story_height == None:
         raise PreventUpdate()
     height = geometry.height_from_story(n_storys, story_height)
-    geometry_dict = geometry.read_geometry_data()
+    #geometry_dict = geometry.read_geometry_data()
+    geometry_dict = {"perimeter":40,"area":100}
     perimeter = float(geometry_dict['perimeter'])
     floorarea = float(geometry_dict['area'])
     facadearea = geometry.facade_area(perimeter, height)

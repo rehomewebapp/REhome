@@ -25,7 +25,7 @@ content = html.Div(children=[
         ],
         style={'width': '100%', 'height': '50vh', 'margin': "auto","padding-right":"15px", "display": "block", "position": "relative"}
     ),
-    html.Div(id = "area_output", children=""),
+    html.Div(id = "location_output", children=""),
 ])
 
 button = html.P(dbc.Button("Done", color="primary", 

@@ -51,6 +51,23 @@ def get_tmy_data(latitude, longitude):
     df.index = pd.to_datetime(df.index, format = '%Y%m%d:%H%M')
     return df
 
+def save_tmy_data(df, userID = "userID", filepath = "models/building/data/"):
+    """Save the weather data in a json file.
+
+        Parameters
+        ----------
+        df : pandas dataframe
+            dataframe containing weather data
+        userID : str
+            ID of the user
+        filepath : str
+            filepath where the json file should be saved
+    """
+    
+    weatherData = df.to_json()
+    filename = filepath + userID + "_weather.json"
+    with open(filename, 'w') as f:
+        json.dump(weatherData, f)
 
 def save_building_data(building, filepath):
 
@@ -64,7 +81,7 @@ def save_building_data(building, filepath):
             filepath where the json file should be saved
     """
 
-    filename = filepath + str(building["id"]) + ".json"
+    filename = filepath + str(building["id"]) + "_building.json"
     with open(filename, 'w') as f:
         json.dump(building, f)
 
@@ -88,6 +105,30 @@ def read_building_data(buildingID, filepath):
     building = json.loads(data)
 
     return building
+
+def save_location_data(location, filepath, userID = "userID_building"):
+    """Save the location in the building's json file.
+
+        Parameters
+        ----------
+        userID : str
+            ID of the building
+        location : list of float
+            latitude, longitude [decimal degrees]
+        filepath : str
+            filepath where the json file is saved
+    """
+    lat = location[0]
+    long = location[1]
+
+    building = read_building_data(userID, filepath)
+    building["location"] = {
+        "latitude": lat,       # Latitude [decimal degrees]
+        "longitude": long,     # Longitude [decimal degrees]
+    }
+    save_building_data(building, filepath)
+
+
 
 #building1 = read_building_data("335662254", "models/building/data/")
 #pprint.pprint(building1)

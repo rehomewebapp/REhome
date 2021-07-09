@@ -43,6 +43,7 @@ building = {
 
 def createBuilding():
     building = {
-    "id": randint(0,1e9),
+    #"id": randint(0,1e9),
+    "id" : "userID"
     }
     return building

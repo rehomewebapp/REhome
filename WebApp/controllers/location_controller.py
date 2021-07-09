@@ -4,10 +4,9 @@ import dash_leaflet as dl
 
 
 from app import app
-from models.building import location
+from models.building import utilities
 
-# CONTROLLER
-
+# create marker and change button style
 @app.callback(
     Output("layer", "children"),
     Output('location_done_button_id', 'disabled'), 
@@ -21,27 +20,23 @@ def map_click(click_lat_lng):
     return marker, False, "success"
 
 
-
+# save location data and download weather data
 @app.callback(
     Output('location_output','children'),
-
-    Input('submit_button','n_clicks'),
-    State('input','value')
+    Input('location_done_button_id','n_clicks'),
+    State("map", "click_lat_lng")
 )
-def handle_location(n_clicks, value):
-    #print('hello from handle_location')
+def handle_location(n_clicks, loc):
+    if n_clicks == 0:
+        raise PreventUpdate()
     if n_clicks == 0:
         return ''
-    loc = location.conv_zip_to_location(value)
-    if loc == None:
-        return f'Sorry we could not find that location.'
     try:
-        location.save_location_data(loc)
+        utilities.save_location_data(loc, "models/building/data/")
     except:
-        #print("could not save location.")
         pass
-    city = loc['city']
-    #data = weather.get_weather(loc)
+    #data = utilities.get_tmy_data(loc[0],loc[1])
+    #utilities.save_tmy_data(data)
     return ""
 
 
