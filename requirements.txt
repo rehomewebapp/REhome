@@ -4,3 +4,6 @@ dash_leaflet
 dash-bootstrap-components
 geopy
 pyproj
+requests
+json
+pandas
