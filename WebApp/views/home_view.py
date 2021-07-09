@@ -24,7 +24,7 @@ content_1 = dbc.Jumbotron(
             className="lead",
         ),
         html.Hr(className="my-2"),
-        html.P(dbc.Button("START", color="primary", href="location"), className="lead"),
+        html.P(dbc.Button("START", color="primary", href="location", id="start_button_id", n_clicks=0), className="lead"),
     ], style={"margin-bottom":"0rem","padding-bottom":"10rem"}
 )
 
@@ -95,6 +95,8 @@ layout = html.Div(children=[
     content_1,
     content_2,
     footer,
+    # needed for the callback, is there a better option if no output is needed?
+    html.Div(children=[""], id="home_output_id") 
 ])
 
 if __name__ == '__main__':
