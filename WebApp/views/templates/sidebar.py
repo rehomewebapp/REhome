@@ -19,7 +19,7 @@ sidebar = html.Div(
                 ),
                 dbc.NavItem(dbc.NavLink("  Location", href="/views/location_view",active=True)),
                 dbc.NavItem(dbc.NavLink("  Geometry",href="/geometry"),),
-                dbc.NavItem(dbc.NavLink("  Materials",href="/?", disabled=True),),
+                dbc.NavItem(dbc.NavLink("  Materials",href="/materials"),),
                 dbc.NavItem(dbc.NavLink("  Occupancy",href="/?", disabled=True),),
                 #html.Hr(className="my-1"),
                 dbc.NavItem(

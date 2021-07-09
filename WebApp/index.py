@@ -3,7 +3,7 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 from app import app, server
-from views import home_view  ,location_view, about_us_view, floorplan_view, geometry_view
+from views import home_view  ,location_view, about_us_view, floorplan_view, geometry_view, materials_view
 from controllers import location_controller, floorplan_controller, geometry_controller
 
 # this sets the layout of our webpage, dcc.location sets the url of the page, 
@@ -31,6 +31,8 @@ def display_page(pathname):
         return floorplan_view.layout
     elif pathname == '/geometry':
         return geometry_view.layout
+    elif pathname == '/materials':
+        return materials_view.layout
     else:
         return '404'
 
