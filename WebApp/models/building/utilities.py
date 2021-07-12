@@ -88,7 +88,7 @@ def save_building_data(building, filepath):
 #save_building_data(building, "models/building/data/")
 
 
-def read_building_data(buildingID, filepath):
+def read_building_data(userID, filepath = "models/building/data/"):
     """Read the building parameters from a json file.
 
         Parameters
@@ -99,14 +99,14 @@ def read_building_data(buildingID, filepath):
             filepath where the json file is saved
     """
 
-    filename = filepath + buildingID + ".json"
+    filename = filepath + userID + "_building.json"
     with open(filename, 'r') as f:
         data = f.read()
     building = json.loads(data)
 
     return building
 
-def save_location_data(location, filepath, userID = "userID_building"):
+def save_location_data(location, filepath, userID = "userID"):
     """Save the location in the building's json file.
 
         Parameters
@@ -120,7 +120,6 @@ def save_location_data(location, filepath, userID = "userID_building"):
     """
     lat = location[0]
     long = location[1]
-
     building = read_building_data(userID, filepath)
     building["location"] = {
         "latitude": lat,       # Latitude [decimal degrees]

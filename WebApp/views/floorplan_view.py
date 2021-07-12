@@ -24,7 +24,7 @@ navbar = create_navbar("Floorplan")
 sidebar = create_sidebar("floorplan")
 
 content = html.Div(children=[
-    html.H1(children='Floorplan', id = 'floorplan_heading'),
+    #html.H1(children='Floorplan', id = 'floorplan_heading'),
     html.H2(children='Trace the outline of your building'),
     dl.Map(id = "floorplan_map",
         children=[
@@ -50,6 +50,7 @@ layout = html.Div(children=[
             ],width=10,style={"padding-left":"0px", "text-align" : "center"})
         ],style={"margin-right":"0px"}),
     ]),
+    html.Div(id = "hidden_div_id"), # used to trigger "pageload event" see floorplan_controller.py
     html.Hr(),
     footer,
 ])

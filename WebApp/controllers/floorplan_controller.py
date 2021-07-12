@@ -2,7 +2,7 @@ from app import app
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
-from models.building import location
+from models.building.utilities import read_building_data
 from models.building.geometry import floorplane_from_geopolygone, save_geometry_data, perimeter_from_geopolygone
 
 
@@ -10,15 +10,16 @@ from models.building.geometry import floorplane_from_geopolygone, save_geometry_
 @app.callback(
     Output('floorplan_map','center'),
     Output('floorplan_map','zoom'),
-    Input('submit_button','n_clicks'),
+    Input('hidden_div_id','children'),
 )
-def set_latlng(n_clicks):
-    if n_clicks == 0:
-        raise PreventUpdate()
-    #print('hello from set_latlng')
-    loc = location.read_location_data()
+def setCenterAndView(hidden_div):
+    # onPageLoad-event would be nicer than a hidden div to trigger the callback
+    # using this suggested solution for now:
+    # https://community.plotly.com/t/trigger-callback-when-a-page-loads-in-order-to-update-all-plots-inputs/10001
+    building = read_building_data("userID")
+    loc = building["location"]
     center = [float(loc['latitude']),float(loc['longitude'])]
-    zoom = 13
+    zoom = 20
     return center, zoom
 
 dummy_pos = [0, 0] # initialize position for marker, polylines and polygone

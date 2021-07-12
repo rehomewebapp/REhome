@@ -31,10 +31,8 @@ def handle_location(n_clicks, loc):
         raise PreventUpdate()
     if n_clicks == 0:
         return ''
-    try:
-        utilities.save_location_data(loc, "models/building/data/")
-    except:
-        pass
+    #print("handle location")
+    utilities.save_location_data(loc, "models/building/data/")
     #data = utilities.get_tmy_data(loc[0],loc[1])
     #utilities.save_tmy_data(data)
     return ""
