@@ -15,7 +15,7 @@ from app import app
 # CREATE THE MAP
 
 content = html.Div(children=[
-    html.H2(children='Find your home on a map and click to place a marker'),
+    html.H2(children='Click to place a marker on your home'),
     dl.Map(id = "map",  zoom = 2,
         children=[
             # create tile layer, and set high zoom levels
