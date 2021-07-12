@@ -34,24 +34,19 @@ def create_sidebar(active_view):
                     dbc.NavItem(dbc.NavLink("  Geometry",href="/geometry",active=view_states["geometry"]),),
                     dbc.NavItem(dbc.NavLink("  Materials",href="/materials",active=view_states["materials"]),),
                     dbc.NavItem(dbc.NavLink("  Occupancy",href="/?", disabled=True),),
-                    #html.Hr(className="my-1"),
                     dbc.NavItem(
                         dbc.Row([   
                             dbc.Col(dbc.NavLink("Renovation", href="/page-2", id="page-2-link"),width=8),
                             dbc.Col(html.Img(src=CHEVRON_DOWN)),
                         ],align="center"), active=False,
                     ),
-                    #dbc.NavItem(dbc.NavLink("Renovation", href="/page-2", id="page-2-link")),
-                    #html.Hr(className="my-1"),
                     dbc.NavItem(
                         dbc.Row([   
                             dbc.Col(dbc.NavLink("System", href="/page-3", id="page-3-link"),width=8),
                             dbc.Col(html.Img(src=CHEVRON_DOWN)),
                         ],align="center"), active=False,
                     ),
-                    #dbc.NavItem(dbc.NavLink("System", href="/page-3", id="page-3-link")),
                 ],
-                #className="secondary",
                 vertical=True,
                 pills=True,
             ),
