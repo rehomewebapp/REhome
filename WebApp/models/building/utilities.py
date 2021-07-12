@@ -74,7 +74,6 @@ def save_tmy_data(df, userID = "userID", filepath = data_path):
         json.dump(weatherData, f)
 
 def save_building_data(building, filepath = data_path):
-
     """Save the building parameters in a json file.
 
         Parameters
@@ -88,9 +87,6 @@ def save_building_data(building, filepath = data_path):
     filename = Path(filepath , str(building["id"]) + "_building.json")
     with open(filename, 'w') as f:
         json.dump(building, f)
-
-#save_building_data(building, "models/building/data/")
-
 
 def read_building_data(userID, filepath = data_path):
     """Read the building parameters from a json file.
