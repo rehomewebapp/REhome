@@ -33,7 +33,7 @@ button = html.P(dbc.Button("Done", color="primary",
     id="location_done_button_id", n_clicks=0, disabled=True))
 
 
-navbar = create_navbar("Building / Location")
+navbar = create_navbar("Location")
 sidebar = create_sidebar("location")
 
 layout = html.Div(children=[

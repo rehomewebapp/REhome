@@ -13,17 +13,13 @@ def create_navbar(active_page):
     if active_page != "home":
         navbar = dbc.Navbar(
             [
-                html.A(
-                    dbc.Row(
-                        [   
-                            dbc.Col(html.Img(src=MENU_OPEN),width = 1),
-                            dbc.Col(html.A(
-                                html.Img(src=REHOME_LOGO, height="48px"), href="/"),
-                            width=3),
-                            dbc.Col(html.H2(children=active_page, className="light"), width = 8),
-                        ],
-                        align="center",
-                    ),
+                dbc.Row(
+                    [   
+                        # dbc.Col(html.Img(src=MENU_OPEN, height = "36"),width = 1),
+                        dbc.Col(html.A(html.Img(src=REHOME_LOGO, height="48px"), href="/")),
+                        dbc.Col(html.H2(children=active_page, className="light")),
+                    ],
+                    align="center",
                 ),
             ],color="primary", #dark=True,
         )

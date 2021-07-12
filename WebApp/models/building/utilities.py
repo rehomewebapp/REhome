@@ -1,6 +1,9 @@
 import requests
 import json
 import pandas as pd
+from pathlib import Path
+
+data_path = Path("models","building","data")
 
 def get_tmy_data(latitude, longitude):
     """Load weather - typical meterological year(TMY) data from PVGIS
@@ -51,7 +54,7 @@ def get_tmy_data(latitude, longitude):
     df.index = pd.to_datetime(df.index, format = '%Y%m%d:%H%M')
     return df
 
-def save_tmy_data(df, userID = "userID", filepath = "models/building/data/"):
+def save_tmy_data(df, userID = "userID", filepath = data_path):
     """Save the weather data in a json file.
 
         Parameters
@@ -60,7 +63,7 @@ def save_tmy_data(df, userID = "userID", filepath = "models/building/data/"):
             dataframe containing weather data
         userID : str
             ID of the user
-        filepath : str
+        filepath : pathlib Path
             filepath where the json file should be saved
     """
     
@@ -69,7 +72,7 @@ def save_tmy_data(df, userID = "userID", filepath = "models/building/data/"):
     with open(filename, 'w') as f:
         json.dump(weatherData, f)
 
-def save_building_data(building, filepath):
+def save_building_data(building, filepath = data_path):
 
     """Save the building parameters in a json file.
 
@@ -77,36 +80,36 @@ def save_building_data(building, filepath):
         ----------
         building : dict
             dictionary with building parameters
-        filepath : str
+        filepath : pathlib Path
             filepath where the json file should be saved
     """
 
-    filename = filepath + str(building["id"]) + "_building.json"
+    filename = Path(filepath , str(building["id"]) + "_building.json")
     with open(filename, 'w') as f:
         json.dump(building, f)
 
 #save_building_data(building, "models/building/data/")
 
 
-def read_building_data(userID, filepath = "models/building/data/"):
+def read_building_data(userID, filepath = data_path):
     """Read the building parameters from a json file.
 
         Parameters
         ----------
         buildingID : str
             ID of the building
-        filepath : str
+        filepath : pathlib Path
             filepath where the json file is saved
     """
 
-    filename = filepath + userID + "_building.json"
+    filename = Path(filepath , userID + "_building.json")
     with open(filename, 'r') as f:
         data = f.read()
     building = json.loads(data)
 
     return building
 
-def save_location_data(location, filepath, userID = "userID"):
+def save_location_data(location, filepath = data_path, userID = "userID"):
     """Save the location in the building's json file.
 
         Parameters
@@ -115,7 +118,7 @@ def save_location_data(location, filepath, userID = "userID"):
             ID of the building
         location : list of float
             latitude, longitude [decimal degrees]
-        filepath : str
+        filepath : pathlib Path
             filepath where the json file is saved
     """
     lat = location[0]

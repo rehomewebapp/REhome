@@ -11,5 +11,5 @@ def initBuilding(n_clicks):
     if n_clicks == 0:
         raise PreventUpdate()
     building = buildingFactory.createBuilding()
-    utilities.save_building_data(building, "models/building/data/")
+    utilities.save_building_data(building)
     return ""

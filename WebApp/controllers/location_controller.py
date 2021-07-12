@@ -32,7 +32,7 @@ def handle_location(n_clicks, loc):
     if n_clicks == 0:
         return ''
     #print("handle location")
-    utilities.save_location_data(loc, "models/building/data/")
+    utilities.save_location_data(loc)
     #data = utilities.get_tmy_data(loc[0],loc[1])
     #utilities.save_tmy_data(data)
     return ""
