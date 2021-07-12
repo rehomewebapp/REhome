@@ -3,7 +3,8 @@ import json
 import pandas as pd
 from pathlib import Path
 
-data_path = Path("models","building","data")
+#data_path = Path("models","building","data")
+data_path = Path()
 
 def get_tmy_data(latitude, longitude):
     """Load weather - typical meterological year(TMY) data from PVGIS
