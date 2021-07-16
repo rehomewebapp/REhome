@@ -19,7 +19,7 @@ def handle_facade(n_storys, story_height):
     perimeter = building['thZones']['tz0']['perimeter']
     facadearea = geometry.facade_area(perimeter, height)
     # TODO! calculate window area and subtract from facade area
-    building['thZones']['tz0']['opaquePlanes'] = {'facadeArea':{'area':facadearea}}
+    building['thZones']['tz0']['opaquePlanes'] = {'facade':{'area':facadearea}}
     save_building_data(building)
 
     return f'{height=}, {perimeter=}, {facadearea=}'
