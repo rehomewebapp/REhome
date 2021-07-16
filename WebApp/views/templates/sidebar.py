@@ -15,6 +15,7 @@ def create_sidebar(active_view):
         "floorplan":False,
         "geometry" : False,
         "materials" : False,
+        "occupancy" : False,
     }
     # set active page 
     view_states[active_view] = True
@@ -30,10 +31,11 @@ def create_sidebar(active_view):
                         ],align="center"), active=True,
                     ),
                     dbc.NavItem(dbc.NavLink("  Location", href="/location",active=view_states["location"])),
+                    dbc.NavItem(dbc.NavLink("  Occupancy",href="/occupancy", active=view_states["occupancy"])),
                     dbc.NavItem(dbc.NavLink("  Floorplan", href="/floorplan",active=view_states["floorplan"])),
-                    dbc.NavItem(dbc.NavLink("  Geometry",href="/geometry",active=view_states["geometry"]),),
-                    dbc.NavItem(dbc.NavLink("  Materials",href="/materials",active=view_states["materials"]),),
-                    dbc.NavItem(dbc.NavLink("  Occupancy",href="/?", disabled=True),),
+                    dbc.NavItem(dbc.NavLink("  Geometry",href="/geometry",active=view_states["geometry"])),
+                    dbc.NavItem(dbc.NavLink("  Materials",href="/materials",active=view_states["materials"])),
+
                     dbc.NavItem(
                         dbc.Row([   
                             dbc.Col(dbc.NavLink("Renovation", href="/page-2", id="page-2-link"),width=8),

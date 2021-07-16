@@ -7,9 +7,12 @@ import dash_leaflet as dl
 from app import app
 from views.templates.header import create_navbar
 from views.templates.sidebar import create_sidebar
+from views.templates.content_navigation import create_content_nav
 from views.templates.footer import footer
 
+
 dummy_pos = [0, 0] # Initial position for marker, polyline and polygon
+
 
 # Marker icon
 icon = {
@@ -22,10 +25,9 @@ icon = {
 # VIEW
 navbar = create_navbar("Floorplan")
 sidebar = create_sidebar("floorplan")
+content_nav = create_content_nav("floorplan","/occupancy", "Trace the outline of your building", "/geometry")
 
 content = html.Div(children=[
-    #html.H1(children='Floorplan', id = 'floorplan_heading'),
-    html.H2(children='Trace the outline of your building'),
     dl.Map(id = "floorplan_map",
         children=[
                 dl.TileLayer(maxZoom = 21, maxNativeZoom = 19), # 
@@ -47,6 +49,7 @@ layout = html.Div(children=[
             dbc.Col(sidebar,width = 2),
             dbc.Col([
                 content,
+                content_nav,
             ],width=10,style={"padding-left":"0px", "text-align" : "center"})
         ],style={"margin-right":"0px"}),
     ]),

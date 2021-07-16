@@ -8,6 +8,8 @@ from models.building.utilities import read_tmy_data
 
 @app.callback(
     Output("materials_output_id","children"),
+    Output('materials_done_button_id', 'disabled'), 
+    Output('materials_done_button_id', 'color'),
     Input("u_facade_id", "value"),
 )
 def handle_facade(u_value):
@@ -33,4 +35,4 @@ def handle_facade(u_value):
     heatflowSum = heatflow_trans_facade.sum()
 
     physics.heatDemand()
-    return f'{heatflowSum = } W'
+    return f'{heatflowSum = } W', False, "success"

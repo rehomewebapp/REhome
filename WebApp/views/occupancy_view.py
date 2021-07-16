@@ -9,34 +9,20 @@ from views.templates.header import create_navbar
 from views.templates.sidebar import create_sidebar
 from views.templates.content_navigation import create_content_nav
 
-content_nav = create_content_nav("geometry","/floorplan", "Enter your building dimensions", "/materials")
-navbar = create_navbar("Geometry")
-sidebar = create_sidebar("geometry")
+navbar = create_navbar("Occupancy")
+sidebar = create_sidebar("occupancy")
+content_nav = create_content_nav("occupancy","/location", "Specify how you use your building", "/floorplan")
 
 input = dbc.Row(
     [
         dbc.Col(
             dbc.FormGroup(
                 [
-                    dbc.Label("Number of storys", html_for="n_storys_id"),
+                    dbc.Label("Comfort temperature", html_for="comfortTemp_id"),
                     dbc.Input(
                         type="number",
-                        id="n_storys_id",
-                        placeholder="Enter number of storys",
-                    ),
-                ]
-            ),
-            width=6,
-        ),
-        dbc.Col(
-            dbc.FormGroup(
-                [
-                    dbc.Label("Height of the storys in meter", html_for="story_height_id"),
-                    dbc.Input(
-                        type="number",
-                        step=0.01,
-                        id="story_height_id",
-                        placeholder="Enter height of the storys in meter",
+                        id="comfortTemp_id",
+                        placeholder="Comfort temperature [°C]",
                     ),
                 ]
             ),
@@ -46,7 +32,7 @@ input = dbc.Row(
     form=True,
 )
 
-output = html.Div("", id = "geometry_output_id")
+output = html.Div("", id = "occupancy_output_id")
 
 content= html.Div([input, output])
 

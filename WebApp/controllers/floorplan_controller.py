@@ -29,7 +29,9 @@ dlatlon2 = 1e-10  # Controls tolerance of closing click
 @app.callback([Output("polyline-id", "positions"),
                Output("polygon-id", "positions"),
                Output("marker_id","position"),
-               Output("area_output","children")],
+               Output("area_output","children"),
+               Output('floorplan_done_button_id', 'disabled'), 
+               Output('floorplan_done_button_id', 'color')],
               [Input("floorplan_map", "click_lat_lng")],
               [State("polyline-id", "positions")])
 def update_polyline_and_polygon(click_lat_lng, positions):
@@ -38,7 +40,7 @@ def update_polyline_and_polygon(click_lat_lng, positions):
     # On first click, reset the polyline and place the start marker
     if len(positions) == 1 and positions[0] == dummy_pos:
         start_marker_position = click_lat_lng
-        return [click_lat_lng], [dummy_pos], start_marker_position, ""
+        return [click_lat_lng], [dummy_pos], start_marker_position, "", True, "primary"
     # If the click is close to the first point, close the polygon, 
     # and hide the marker.
     #print(click_lat_lng)
@@ -51,10 +53,10 @@ def update_polyline_and_polygon(click_lat_lng, positions):
         # create a new thermal zone
         building['thZones'] = {'tz0':{'floorArea':area, 'perimeter':perimeter}}
         save_building_data(building)
-        return [dummy_pos], positions, [0,0], f"{area=}m^2" # last return sets marker somewhere invisible
+        return [dummy_pos], positions, [0,0], f"{area=}m^2", False, "success"
     # Otherwise, append the click position.
     positions.append(click_lat_lng)
-    return positions, [dummy_pos], positions[0], ""
+    return positions, [dummy_pos], positions[0], "", True, "primary"
 
 if __name__ == '__main__':
     app.run_server(debug=True)

@@ -7,10 +7,12 @@ import dash_bootstrap_components as dbc
 from views.templates.footer import footer
 from views.templates.header import create_navbar
 from views.templates.sidebar import create_sidebar
+from views.templates.content_navigation import create_content_nav
 
+content_nav = create_content_nav("materials","/geometry", "Enter the material properties of your building", "/404")
 navbar = create_navbar("Materials")
-
 sidebar = create_sidebar("materials")
+
 input = dbc.Row(
     [
         dbc.Col(
@@ -41,6 +43,7 @@ layout = html.Div(children=[
             dbc.Col(sidebar,width = 2),
             dbc.Col([
                 content,
+                content_nav,
             ],width=10,style={"padding-left":"0px"})
         ],style={"margin-right":"0px"}),
     ]),

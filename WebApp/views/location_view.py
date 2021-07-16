@@ -7,15 +7,18 @@ import dash_leaflet as dl
 
 from views.templates.header import create_navbar
 from views.templates.sidebar import create_sidebar
+from views.templates.content_navigation import create_content_nav
 from views.templates.footer import footer
 
 from app import app
 
 
-# CREATE THE MAP
+navbar = create_navbar("Location")
+sidebar = create_sidebar("location")
+content_nav = create_content_nav("location","", "Click to place a marker on your home", "/occupancy")
 
+# CREATE THE MAP
 content = html.Div(children=[
-    html.H2(children='Click to place a marker on your home'),
     dl.Map(id = "map",  zoom = 2,
         children=[
             # create tile layer, and set high zoom levels
@@ -28,14 +31,6 @@ content = html.Div(children=[
     html.Div(id = "location_output", children=""),
 ])
 
-button = html.P(dbc.Button("Done", color="primary", 
-    href="floorplan",
-    id="location_done_button_id", n_clicks=0, disabled=True))
-
-
-navbar = create_navbar("Location")
-sidebar = create_sidebar("location")
-
 layout = html.Div(children=[
     navbar,
     html.Div([
@@ -43,7 +38,7 @@ layout = html.Div(children=[
             dbc.Col(sidebar,width = 2),
             dbc.Col([
                 content,
-                button,
+                content_nav,
             ],width=10,style={"padding-left":"0px", "text-align" : "center"})
         ],style={"margin-right":"0px"}),
     ]),
