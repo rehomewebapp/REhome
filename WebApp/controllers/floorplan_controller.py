@@ -2,8 +2,8 @@ from app import app
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 
-from models.building.utilities import read_building_data
-from models.building.geometry import floorplane_from_geopolygone, save_geometry_data, perimeter_from_geopolygone
+from models.building.buildingFactory import read_building_data, save_building_data
+from models.building.geometry import floorplane_from_geopolygone, perimeter_from_geopolygone
 
 
 # callback to center location
@@ -23,7 +23,7 @@ def setCenterAndView(hidden_div):
     return center, zoom
 
 dummy_pos = [0, 0] # initialize position for marker, polylines and polygone
-dlatlon2 = 1e-11  # Controls tolerance of closing click
+dlatlon2 = 1e-10  # Controls tolerance of closing click
 
 # callback for drawing the floorplan
 @app.callback([Output("polyline-id", "positions"),
@@ -46,8 +46,11 @@ def update_polyline_and_polygon(click_lat_lng, positions):
     if dist2 < dlatlon2:
         perimeter = perimeter_from_geopolygone(positions)
         area = floorplane_from_geopolygone(positions)
-        #save_geometry_data(perimeter, area)
-        #print('done')
+
+        building = read_building_data("userID")
+        # create a new thermal zone
+        building['thZones'] = {'tz0':{'floorArea':area, 'perimeter':perimeter}}
+        save_building_data(building)
         return [dummy_pos], positions, [0,0], f"{area=}m^2" # last return sets marker somewhere invisible
     # Otherwise, append the click position.
     positions.append(click_lat_lng)

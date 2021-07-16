@@ -18,18 +18,51 @@ def get_tmy_data(latitude, longitude):
 
     Returns
     -------
+    content of the requests.response object containing weather data
+    """
+    url = 'https://re.jrc.ec.europa.eu/api/tmy?lat='+str(latitude)+'&lon='+str(longitude)+'&outputformat=json'
+    response = requests.get(url)
+    return response.content
+
+def save_tmy_data(data, userID = "userID", filepath = data_path):
+    """Save the weather data in a json file.
+
+        Parameters
+        ----------
+        data : content of the requests.response object
+            content of the requests.response object containing weather data
+        userID : str
+            ID of the user
+        filepath : pathlib Path
+            filepath where the json file should be saved
+    """
+    Path(filepath , userID + "_weather.json").write_bytes(data)
+
+
+def read_tmy_data(userID = "userID", filepath = data_path):
+    """Read the weather data from a json file and write to pandas dataframe.
+
+    Parameters
+    ----------
+    userID : str
+        ID of the user
+    filepath : pathlib Path
+        filepath where the json file is saved
+
+    Returns
+    -------
     pandas df containing
 
-        - time (index, datetime): Date & time (UTC)
-        - T2m (pandas column, float): Dry bulb (air) temperature [°C]
-        - RH (pandas column, float):  Relative Humidity [%]
-        - G(h) (pandas column, float): Global horizontal irradiance [W/m2]
-        - Gb(n) (pandas column, float): Direct (beam) irradiance [W/m2]
-        - Gd(h) (pandas column, float): Diffuse horizontal irradiance [W/m2]
-        - IR(h) (pandas column, float): Infrared radiation downwards [W/m2]
-        - WS10m (pandas column, float): Windspeed [m/s]
-        - WD10m (pandas column, float): Wind direction [°]
-        - SP (pandas column, float): Surface (air) pressure [Pa]
+    - time (index, datetime): Date & time (UTC)
+    - T2m (pandas column, float): Dry bulb (air) temperature [°C]
+    - RH (pandas column, float):  Relative Humidity [%]
+    - G(h) (pandas column, float): Global horizontal irradiance [W/m2]
+    - Gb(n) (pandas column, float): Direct (beam) irradiance [W/m2]
+    - Gd(h) (pandas column, float): Diffuse horizontal irradiance [W/m2]
+    - IR(h) (pandas column, float): Infrared radiation downwards [W/m2]
+    - WS10m (pandas column, float): Windspeed [m/s]
+    - WD10m (pandas column, float): Wind direction [°]
+    - SP (pandas column, float): Surface (air) pressure [Pa]
 
     Notes
     -----
@@ -45,89 +78,14 @@ def get_tmy_data(latitude, longitude):
 
     """
 
-    url = 'https://re.jrc.ec.europa.eu/api/tmy?lat='+str(latitude)+'&lon='+str(longitude)+'&outputformat=json'
-    
-    response = requests.get(url)
-    data = json.loads(response.text)
+    filename = Path(filepath , userID + "_weather.json")
+    with open(filename, 'r') as file:
+        data = json.load(file)
     data_outputs_hourly = data['outputs']['tmy_hourly']
     df = pd.DataFrame.from_dict(data_outputs_hourly)
     df.set_index('time(UTC)', inplace = True)
     df.index = pd.to_datetime(df.index, format = '%Y%m%d:%H%M')
     return df
-
-def save_tmy_data(df, userID = "userID", filepath = data_path):
-    """Save the weather data in a json file.
-
-        Parameters
-        ----------
-        df : pandas dataframe
-            dataframe containing weather data
-        userID : str
-            ID of the user
-        filepath : pathlib Path
-            filepath where the json file should be saved
-    """
-    
-    weatherData = df.to_json()
-    filename = filepath + userID + "_weather.json"
-    with open(filename, 'w') as f:
-        json.dump(weatherData, f)
-
-def save_building_data(building, filepath = data_path):
-    """Save the building parameters in a json file.
-
-        Parameters
-        ----------
-        building : dict
-            dictionary with building parameters
-        filepath : pathlib Path
-            filepath where the json file should be saved
-    """
-
-    filename = Path(filepath , str(building["id"]) + "_building.json")
-    with open(filename, 'w') as f:
-        json.dump(building, f)
-
-def read_building_data(userID, filepath = data_path):
-    """Read the building parameters from a json file.
-
-        Parameters
-        ----------
-        buildingID : str
-            ID of the building
-        filepath : pathlib Path
-            filepath where the json file is saved
-    """
-
-    filename = Path(filepath , userID + "_building.json")
-    with open(filename, 'r') as f:
-        data = f.read()
-    building = json.loads(data)
-
-    return building
-
-def save_location_data(location, filepath = data_path, userID = "userID"):
-    """Save the location in the building's json file.
-
-        Parameters
-        ----------
-        userID : str
-            ID of the building
-        location : list of float
-            latitude, longitude [decimal degrees]
-        filepath : pathlib Path
-            filepath where the json file is saved
-    """
-    lat = location[0]
-    long = location[1]
-    building = read_building_data(userID, filepath)
-    building["location"] = {
-        "latitude": lat,       # Latitude [decimal degrees]
-        "longitude": long,     # Longitude [decimal degrees]
-    }
-    save_building_data(building, filepath)
-
-
 
 #building1 = read_building_data("335662254", "models/building/data/")
 #pprint.pprint(building1)

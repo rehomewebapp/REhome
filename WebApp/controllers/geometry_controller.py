@@ -2,6 +2,7 @@ from dash.dependencies import Input, Output
 from app import app
 from models.building import geometry
 from dash.exceptions import PreventUpdate
+from models.building.buildingFactory import read_building_data, save_building_data
 
 
 @app.callback(
@@ -14,8 +15,11 @@ def handle_facade(n_storys, story_height):
         raise PreventUpdate()
     height = geometry.height_from_story(n_storys, story_height)
     #geometry_dict = geometry.read_geometry_data()
-    geometry_dict = {"perimeter":40,"area":100}
-    perimeter = float(geometry_dict['perimeter'])
-    floorarea = float(geometry_dict['area'])
+    building = read_building_data(userID='userID')
+    perimeter = building['thZones']['tz0']['perimeter']
     facadearea = geometry.facade_area(perimeter, height)
-    return f'{height=}, {perimeter=}, {floorarea=}, {facadearea=}'
+    # TODO! calculate window area and subtract from facade area
+    building['thZones']['tz0']['opaquePlanes'] = {'facadeArea':{'area':facadearea}}
+    save_building_data(building)
+
+    return f'{height=}, {perimeter=}, {facadearea=}'

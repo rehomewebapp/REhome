@@ -1,6 +1,52 @@
 
 import json
+from pathlib import Path
 from random import randint
+
+#data_path = Path("models","building","data")
+data_path = Path()
+
+def createBuilding():
+    building = {
+    #"id": randint(0,1e9),
+    "id" : "userID"
+    }
+    return building
+
+
+def save_building_data(building, filepath = data_path):
+    """Save the building parameters in a json file.
+
+    Parameters
+    ----------
+    building : dict
+        dictionary with building parameters
+    filepath : pathlib Path
+        filepath where the json file should be saved
+    """
+
+    filename = Path(filepath , str(building["id"]) + "_building.json")
+    with open(filename, 'w') as f:
+        json.dump(building, f)
+
+def read_building_data(userID, filepath = data_path):
+    """Read the building parameters from a json file.
+
+    Parameters
+    ----------
+    buildingID : str
+        ID of the building
+    filepath : pathlib Path
+        filepath where the json file is saved
+    """
+
+    filename = Path(filepath , userID + "_building.json")
+    with open(filename, 'r') as f:
+        data = f.read()
+    building = json.loads(data)
+
+    return building
+
 
 '''
 building = {
@@ -15,6 +61,7 @@ building = {
             "name" : None,       # e.g. kitchen, bedroom, basement
             "volume" : None,    # Volume [m^3]
             "floorArea" : None, # Floor area in [m^2]
+            "perimeter" : None, # Perimeter of the floor area in [m]
             "tempIn" : None,    # Indoor temperature [°C]
             "gainsInt" : None,  # Internal gains [W/m^2]
             "nInf" : None,      # Infiltration number [1/h]
@@ -40,10 +87,3 @@ building = {
     }
 }
 '''
-
-def createBuilding():
-    building = {
-    #"id": randint(0,1e9),
-    "id" : "userID"
-    }
-    return building
