@@ -1,17 +1,8 @@
-
-import dash
 import dash_html_components as html
-import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 
-from views.templates.footer import footer
-from views.templates.header import create_navbar
-from views.templates.sidebar import create_sidebar
-from views.templates.content_navigation import create_content_nav
+from views.templates.createLayout import create_layout
 
-content_nav = create_content_nav("geometry","/floorplan", "Enter your building dimensions", "/materials")
-navbar = create_navbar("Geometry")
-sidebar = create_sidebar("geometry")
 
 input = dbc.Row(
     [
@@ -50,16 +41,4 @@ output = html.Div("", id = "geometry_output_id")
 
 content= html.Div([input, output])
 
-layout = html.Div(children=[
-    navbar,
-    html.Div([
-        dbc.Row([
-            dbc.Col(sidebar,width = 2),
-            dbc.Col([
-                content,
-                content_nav,
-            ],width=10,style={"padding-left":"0px"})
-        ],style={"margin-right":"0px"}),
-    ]),
-    footer,
-])
+layout = create_layout("geometry","/floorplan", "Enter your building dimensions", "/materials", content)

@@ -24,3 +24,4 @@ layout = html.Div(children=[
     content,
     footer,
 ])
+

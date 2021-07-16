@@ -9,7 +9,8 @@ data_path = Path()
 def createBuilding():
     building = {
     #"id": randint(0,1e9),
-    "id" : "userID"
+    "id" : "userID",
+    'thZones' : {'tz0':{'opaquePlanes':{'roof':{},'facade':{},'floor':{}}}}
     }
     return building
 

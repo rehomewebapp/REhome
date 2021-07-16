@@ -11,14 +11,18 @@ from models.building.utilities import read_tmy_data
     Output('materials_done_button_id', 'disabled'), 
     Output('materials_done_button_id', 'color'),
     Input("u_facade_id", "value"),
+    Input("u_roof_id", "value"),
+    Input("u_floor_id", "value"),
 )
-def handle_facade(u_value):
-    if u_value == None:
+def handle_facade(u_facade, u_roof, u_floor):
+    if u_facade == None or u_roof == None or u_floor == None:
         raise PreventUpdate()
 
-    # save u_value to building
+    # save u_values to building
     building = read_building_data(userID='userID')
-    building['thZones']['tz0']['opaquePlanes']['facade']['u-value'] = u_value
+    building['thZones']['tz0']['opaquePlanes']['facade']['u-value'] = u_facade
+    building['thZones']['tz0']['opaquePlanes']['roof']['u-value'] = u_roof
+    building['thZones']['tz0']['opaquePlanes']['floor']['u-value'] = u_floor
     save_building_data(building)
     
     # read building facade area
@@ -31,7 +35,7 @@ def handle_facade(u_value):
     temp_comfort=20
     
 
-    heatflow_trans_facade = physics.transmission(u_value, facadeArea, temp_comfort, tempAmb)
+    heatflow_trans_facade = physics.transmission(u_facade, facadeArea, temp_comfort, tempAmb)
     heatflowSum = heatflow_trans_facade.sum()
 
     physics.heatDemand()

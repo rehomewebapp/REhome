@@ -51,7 +51,8 @@ def update_polyline_and_polygon(click_lat_lng, positions):
 
         building = read_building_data("userID")
         # create a new thermal zone
-        building['thZones'] = {'tz0':{'floorArea':area, 'perimeter':perimeter}}
+        building['thZones']['tz0']['floorArea'] = area
+        building['thZones']['tz0']['perimeter'] = perimeter
         save_building_data(building)
         return [dummy_pos], positions, [0,0], f"{area=}m^2", False, "success"
     # Otherwise, append the click position.

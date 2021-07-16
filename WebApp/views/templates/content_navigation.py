@@ -18,5 +18,5 @@ def create_content_nav(activePage, url_prev, text, url_next):
             html.H3(text)
         ], style={"text-align" : "center"}),
         dbc.Col([html.P(dbc.Button("Next", color="primary", href=url_next, id=nextButtonID, n_clicks=0, disabled=True))], style={"text-align" : "right"}),
-    ])
+    ], style={'padding':'1rem'})
     return content_nav

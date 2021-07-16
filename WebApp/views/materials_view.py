@@ -1,51 +1,41 @@
-
-import dash
 import dash_html_components as html
-import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 
-from views.templates.footer import footer
-from views.templates.header import create_navbar
-from views.templates.sidebar import create_sidebar
-from views.templates.content_navigation import create_content_nav
+from views.templates.createLayout import create_layout
 
-content_nav = create_content_nav("materials","/geometry", "Enter the material properties of your building", "/404")
-navbar = create_navbar("Materials")
-sidebar = create_sidebar("materials")
 
-input = dbc.Row(
-    [
-        dbc.Col(
-            dbc.FormGroup(
-                [
+uFacadeInput = dbc.Col(
+                dbc.FormGroup([
                     dbc.Label("Heat transfer coefficient of the facade (U-value)", html_for="u_facade_id"),
-                    dbc.Input(
-                        type="number",
-                        id="u_facade_id",
-                        placeholder="U-value [W/m^2K]",
-                    ),
-                ]
-            ),
-            width=6,
-        ),
-    ],
-    form=True,
+                    dbc.Input(type="number", id="u_facade_id", placeholder="U-value facade [W/m^2K]")
+                ]),
+        width=6)
+
+uRoofInput = dbc.Col(
+                dbc.FormGroup([
+                    dbc.Label("Heat transfer coefficient of the roof (U-value)", html_for="u_roof_id"),
+                    dbc.Input(type="number", id="u_roof_id", placeholder="U-value roof [W/m^2K]")
+                ]),
+        width=6)
+
+uFloorInput = dbc.Col(
+                dbc.FormGroup([
+                    dbc.Label("Heat transfer coefficient of the floor (U-value)", html_for="u_floor_id"),
+                    dbc.Input(type="number", id="u_floor_id", placeholder="U-value floor [W/m^2K]")
+                ]),
+        width=6)
+
+
+input = dbc.Row([
+            uFacadeInput,
+            uRoofInput,
+            uFloorInput,
+            ],form=True
 )
+
 
 output = html.Div("", id = "materials_output_id")
 
 content= html.Div([input, output])
 
-layout = html.Div(children=[
-    navbar,
-    html.Div([
-        dbc.Row([
-            dbc.Col(sidebar,width = 2),
-            dbc.Col([
-                content,
-                content_nav,
-            ],width=10,style={"padding-left":"0px"})
-        ],style={"margin-right":"0px"}),
-    ]),
-    footer,
-])
+layout = create_layout("materials","/geometry", "Enter the material properties of your building", "/404", content)
