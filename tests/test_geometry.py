@@ -1,17 +1,7 @@
 import unittest
-from WebApp.models.building.geometry import Geometry
 from WebApp.models.building.geometry import floorplane_from_geopolygone, perimeter_from_geopolygone, facade_area, height_from_story
 
 class TestGeometry(unittest.TestCase):
-    def setUp(self):
-        self.geometry = Geometry(width = 1, length = 2, story_height = 3, stories = 4, roof_type = "flat")
-
-    def test_volume_calculation(self):
-        self.assertEqual(self.geometry.volume, 24)
-
-    def test_floorplan_area_calculation(self):
-        self.assertEqual(self.geometry.floor_area, 2)
-        pass
 
     def test_conv_geopolygone_from_area(self):
         polygone = [
