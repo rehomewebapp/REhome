@@ -38,4 +38,4 @@ output = html.Div("", id = "materials_output_id")
 
 content= html.Div([input, output])
 
-layout = create_layout("materials","/geometry", "Enter the material properties of your building", "/404", content)
+layout = create_layout("materials","/geometry", "Enter the material properties of your building", "/about_us", content)

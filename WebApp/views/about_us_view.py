@@ -14,10 +14,12 @@ ABOUT_US = "/assets/about_us.png"
 
 content = html.Div([
     html.Br(),
+    html.P("Work in progress!"),
+    html.Br(),
     html.P("We are a team of students who want to save the world (:"),
     html.Img(src=ABOUT_US),
     html.P("Have fun with our WebApp!"),
-])
+], style={"padding":"1rem"})
 
 layout = html.Div(children=[
     navbar,
