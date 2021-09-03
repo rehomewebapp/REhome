@@ -20,11 +20,13 @@ def handle_facade(n_storys, story_height):
     building = read_building_data(userID='userID')
     perimeter = building['thZones']['tz0']['perimeter']
     floorarea = building['thZones']['tz0']['floorArea']
+    heatedArea = floorarea * n_storys
     facadearea = geometry.facade_area(perimeter, height)
     # TODO! calculate window area and subtract from facade area
     building['thZones']['tz0']['opaquePlanes']['facade']['area'] = facadearea
     building['thZones']['tz0']['opaquePlanes']['roof']['area'] = floorarea
     building['thZones']['tz0']['opaquePlanes']['floor']['area'] = floorarea
+    building['thZones']['tz0']['heatedArea'] = heatedArea
     save_building_data(building)
 
     return f'{height=}, {perimeter=}, {facadearea=}', False, "success"

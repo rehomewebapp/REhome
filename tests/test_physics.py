@@ -20,5 +20,8 @@ class TestBuildingPhysics(unittest.TestCase):
     def test_heatflow2Energy(self):
         self.assertEqual(physics.heatflow2Energy(heatflow=10,timestep=1),10)
 
+    def test_internalGains(self):
+        self.assertEqual(physics.internalGains(area = 100, specInternalGains = 5), 500)
+
 if __name__ == '__main__':
     unittest.main()

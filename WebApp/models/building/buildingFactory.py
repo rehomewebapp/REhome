@@ -62,6 +62,7 @@ building = {
             "name" : None,       # e.g. kitchen, bedroom, basement
             "volume" : None,    # Volume [m^3]
             "floorArea" : None, # Floor area in [m^2]
+            "heatedArea" : None, # Heated living area [m^2]
             "perimeter" : None, # Perimeter of the floor area in [m]
             "tempIn" : None,    # Indoor temperature [°C]
             "gainsInt" : None,  # Internal gains [W/m^2]

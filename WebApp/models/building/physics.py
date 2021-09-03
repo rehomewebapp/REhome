@@ -59,6 +59,30 @@ def solarGains(gValue, area, irrad):
     heatFlow = gValue * area * irrad
     return heatFlow
 
+def internalGains(area, specInternalGains):
+    """Calculate the internal gains for the heated area.
+
+    Parameters
+    ----------
+    area : float
+        Heated living area :math:`A~[m^2]`
+    specInternalGains : float
+        Specific internal gains :math:`q_{int}~[W/m^2]`
+    
+    Returns
+    -------
+    float
+        Heatflow of internal gains :math:`\dot{Q}_{int}~[W]`
+
+    Notes
+    -----
+    .. math::
+        \dot{Q}_{int} = q_{int} \cdot A
+    """
+    heatFlow = specInternalGains * area
+    return heatFlow
+
+
 def infAndVent(n, volume, tempIn, tempAmb):
     r"""Calculate the infiltration and/or ventilation losses of a volume.
 

@@ -42,7 +42,11 @@ def handle_facade(u_facade, u_roof, u_floor):
     #temperature = data['T2m']
     df = pd.DataFrame(index = index)
     df['Qflow_trans'] = physics.transmission(u_facade, facadeArea, temp_comfort, tempAmb)
+
+    building = read_building_data(userID='userID')
     
+    df['Qflow_int'] = physics.internalGains(area = building['thZones']['tz0']['heatedArea'], 
+                                           specInternalGains= building['thZones']['tz0']['gainsInt']) 
     graph = create_graph(df)
 
 
