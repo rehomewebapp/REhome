@@ -1,9 +1,12 @@
 from dash.dependencies import Input, Output
+import pandas as pd
+import datetime
 from app import app
 from models.building import physics, geometry
 from dash.exceptions import PreventUpdate
 from models.building.buildingFactory import save_building_data, read_building_data
 from models.building.utilities import read_tmy_data
+from views.templates.graphs import create_graph
 
 
 @app.callback(
@@ -28,15 +31,21 @@ def handle_facade(u_facade, u_roof, u_floor):
     # read building facade area
     building = read_building_data(userID='userID')
     facadeArea = building['thZones']['tz0']['opaquePlanes']['facade']['area']
-    #load ambient temperature
+    #load weather data
+    index = pd.date_range(datetime.datetime(2021,1,1), periods=8760, freq="h")
+    #data = read_tmy_data("userID")
     tempAmb = read_tmy_data("userID")['T2m']
-
+    tempAmb.index = index
+    
     #TO DO: load comfort temp (and add to view occupancy)
     temp_comfort=20
+    #temperature = data['T2m']
+    df = pd.DataFrame(index = index)
+    df['Qflow_trans'] = physics.transmission(u_facade, facadeArea, temp_comfort, tempAmb)
     
+    graph = create_graph(df)
 
-    heatflow_trans_facade = physics.transmission(u_facade, facadeArea, temp_comfort, tempAmb)
-    heatflowSum = heatflow_trans_facade.sum()
 
-    physics.heatDemand()
-    return f'{heatflowSum = } W', False, "success"
+    heatflowSum = df['Qflow_trans'].sum()/1000 
+    #physics.heatDemand()
+    return [f'Transmission losses: {heatflowSum:.2f} kWh/a', u_facade, u_roof, u_floor , graph], False, "success"
