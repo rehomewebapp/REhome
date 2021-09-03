@@ -29,27 +29,39 @@ def handle_facade(u_facade, u_roof, u_floor):
     save_building_data(building)
     
     # read building facade area
-    building = read_building_data(userID='userID')
     facadeArea = building['thZones']['tz0']['opaquePlanes']['facade']['area']
+    roofArea = building['thZones']['tz0']['opaquePlanes']['roof']['area']
+    floorArea = building['thZones']['tz0']['opaquePlanes']['floor']['area']
     #load weather data
     index = pd.date_range(datetime.datetime(2021,1,1), periods=8760, freq="h")
     #data = read_tmy_data("userID")
     tempAmb = read_tmy_data("userID")['T2m']
     tempAmb.index = index
     
-    #TO DO: load comfort temp (and add to view occupancy)
-    temp_comfort=20
+    #load comfort temp
+    temp_comfort=building['thZones']['tz0']['tempIn']
+
+    #TO DO: find good model for ground temperature
+    tempGround = 12
+
     #temperature = data['T2m']
     df = pd.DataFrame(index = index)
-    df['Qflow_trans'] = physics.transmission(u_facade, facadeArea, temp_comfort, tempAmb)
-
-    building = read_building_data(userID='userID')
+    df['Qflow_trans_facade'] = physics.transmission(u_facade, facadeArea, temp_comfort, tempAmb)
+    df['Qflow_trans_roof'] = physics.transmission(u_roof, roofArea, temp_comfort, tempAmb)
+    df['Qflow_trans_ground'] = physics.transmission(u_floor, floorArea, temp_comfort, tempGround)
     
     df['Qflow_int'] = physics.internalGains(area = building['thZones']['tz0']['heatedArea'], 
-                                           specInternalGains= building['thZones']['tz0']['gainsInt']) 
+                                           specInternalGains= building['thZones']['tz0']['gainsInt'])
+
+    df['Qflow_vent'] = physics.infAndVent(n = building['thZones']['tz0']['nVent'] + building['thZones']['tz0']['nInf'],
+                                        volume = building['thZones']['tz0']['volume'],
+                                        tempIn = temp_comfort,
+                                        tempAmb = tempAmb)
+
+
     graph = create_graph(df)
 
 
-    heatflowSum = df['Qflow_trans'].sum()/1000 
+    heatflowSum = df['Qflow_trans_facade'].sum()/1000 
     #physics.heatDemand()
     return [f'Transmission losses: {heatflowSum:.2f} kWh/a', u_facade, u_roof, u_floor , graph], False, "success"
