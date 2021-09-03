@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 from views.templates.createLayout import create_layout
 
 
-input = dbc.Row(
+input = html.Div(
     [
         dbc.Col(
             dbc.FormGroup(
@@ -17,24 +17,21 @@ input = dbc.Row(
                     ),
                 ]
             ),
-            width=6,
         ),
         dbc.Col(
             dbc.FormGroup(
                 [
-                    dbc.Label("Height of the storys in meter", html_for="story_height_id"),
+                    dbc.Label("Height of the storys [m]", html_for="story_height_id"),
                     dbc.Input(
                         type="number",
                         step=0.01,
                         id="story_height_id",
-                        placeholder="Enter height of the storys in meter",
+                        placeholder="Enter height of the storys",
                     ),
                 ]
             ),
-            width=6,
         ),
     ],
-    form=True,
 )
 
 output = html.Div("", id = "geometry_output_id")
