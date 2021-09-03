@@ -14,7 +14,7 @@ def transmission(uValue, area, tempIn, tempAmb):
         Area of the plane :math:`A~[m^2]`
     tempIn : float
         Temperature inside of the plane :math:`T_{in}~[°C]`
-    tempAmb : float
+    tempAmb : float or series
         Temperature outside of the plane :math:`T_{amb}~[°C]`
 
     Returns
