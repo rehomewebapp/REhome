@@ -57,26 +57,130 @@ building = {
         "longitude": None,      # Longitude [decimal degrees]
         },
     "weatherFile": None,        # Filename of the weather file [string]
+    "groundArea": XX,           # Ground area in [m^2]
+    "n_storys" : XX,            # number of storys
     "thZones" : {
-        "tz0" : {
-            "name" : None,       # e.g. kitchen, bedroom, basement
+        "livingSpace" : {
             "volume" : None,    # Volume [m^3]
-            "floorArea" : None, # Floor area in [m^2]
-            "heatedArea" : None, # Heated living area [m^2]
-            "perimeter" : None, # Perimeter of the floor area in [m]
+            "floorArea" : None, # Floor area of thermal zone [m^2]
+            "heated" : True,    
             "tempIn" : None,    # Indoor temperature [°C]
             "gainsInt" : None,  # Internal gains [W/m^2]
             "nInf" : None,      # Infiltration number [1/h]
             "nVent" : None,     # Ventilation number [1/h]
             "opaquePlanes" : {  # Walls, Ceiling/Floor, Roof
-                "op0": {
-                    "adjTZ" : None,  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                "facade": {
+                    "adjTZ" : "ambient",  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                },
+                "ceiling": {
+                    "adjTZ" : "attic",  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                },
+                "floor": {
+                    "adjTZ" : "basement",  # adjacent thermal zone (string) i.e. ambient, ground, tzX
                     "u-value": None, # U-value [W/m^2/K]
                     "area" : None,   # area of the plane [m^2] 
                 },
             },
             "transPlanes" : { # transparent planes e.g. windows, transparent doors
-                "tp0" : {
+                "windowA" : {
+                    "adjTZ" : None,  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                    "g-value" : None, # solar heat gain coefficient [-]
+                    "tilt" : None,    # tilt angle [deg]
+                    "azimuth": None,  # azimuth angle 0 = north, 90 = east ... [deg]
+                }
+                "windowB" : {
+                    "adjTZ" : None,  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                    "g-value" : None, # solar heat gain coefficient [-]
+                    "tilt" : None,    # tilt angle [deg]
+                    "azimuth": None,  # azimuth angle 0 = north, 90 = east ... [deg]
+                }
+                "windowC" : {
+                    "adjTZ" : None,  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                    "g-value" : None, # solar heat gain coefficient [-]
+                    "tilt" : None,    # tilt angle [deg]
+                    "azimuth": None,  # azimuth angle 0 = north, 90 = east ... [deg]
+                }
+                "windowD" : {
+                    "adjTZ" : None,  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                    "g-value" : None, # solar heat gain coefficient [-]
+                    "tilt" : None,    # tilt angle [deg]
+                    "azimuth": None,  # azimuth angle 0 = north, 90 = east ... [deg]
+                }
+            }    
+        },
+        "attic" : {
+            "volume" : None,    # Volume [m^3]
+            "floorArea" : None, # Floor area of thermal zone [m^2]
+            "heated" : False,
+            "tempIn" : None,    # Indoor temperature [°C]
+            "gainsInt" : None,  # Internal gains [W/m^2]
+            "nInf" : None,      # Infiltration number [1/h]
+            "nVent" : None,     # Ventilation number [1/h]
+            "opaquePlanes" : {  # Walls, Ceiling/Floor, Roof
+                "roof": {
+                    "adjTZ" : "ambient",  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                },
+                "floor": {
+                    "adjTZ" : "livingSpace",  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                },
+            },
+            "transPlanes" : { # transparent planes e.g. windows, transparent doors
+                "windowA" : {
+                    "adjTZ" : None,  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                    "g-value" : None, # solar heat gain coefficient [-]
+                    "tilt" : None,    # tilt angle [deg]
+                    "azimuth": None,  # azimuth angle 0 = north, 90 = east ... [deg]
+                }
+                "windowB" : {
+                    "adjTZ" : None,  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                    "g-value" : None, # solar heat gain coefficient [-]
+                    "tilt" : None,    # tilt angle [deg]
+                    "azimuth": None,  # azimuth angle 0 = north, 90 = east ... [deg]
+                }
+            }    
+        },
+        "basement" : {
+            "volume" : None,    # Volume [m^3]
+            "floorArea" : None, # Floor area of thermal zone [m^2]
+            "heated" : False,
+            "tempIn" : None,    # Indoor temperature [°C]
+            "gainsInt" : None,  # Internal gains [W/m^2]
+            "nInf" : None,      # Infiltration number [1/h]
+            "nVent" : None,     # Ventilation number [1/h]
+            "opaquePlanes" : {  # Walls, Ceiling/Floor, Roof
+                "ceiling": {
+                    "adjTZ" : "livingSpace",  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                },
+                "ground": {
+                    "adjTZ" : "ground",  # adjacent thermal zone (string) i.e. ambient, ground, tzX
+                    "u-value": None, # U-value [W/m^2/K]
+                    "area" : None,   # area of the plane [m^2] 
+                },
+            },
+            "transPlanes" : { # transparent planes e.g. windows, transparent doors
+                "windowA" : {
                     "adjTZ" : None,  # adjacent thermal zone (string) i.e. ambient, ground, tzX
                     "u-value": None, # U-value [W/m^2/K]
                     "area" : None,   # area of the plane [m^2] 
@@ -89,3 +193,4 @@ building = {
     }
 }
 '''
+
