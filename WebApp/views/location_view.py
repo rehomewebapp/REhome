@@ -11,7 +11,6 @@ content = html.Div(children=[
             # create tile layer, and set high zoom levels
             dl.TileLayer(maxZoom = 21, maxNativeZoom = 19),
             dl.GestureHandling(),
-            dl.ScaleControl(), # adds scale in bottom left corner
             dl.LayerGroup(id="layer"), # add layer for the marker
         ],
         style={'width': '100%', 'height': '50vh', 'margin': "auto", "display": "block", "position": "relative"}

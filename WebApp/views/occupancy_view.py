@@ -5,31 +5,30 @@ from views.templates.createLayout import create_layout
 
 comfTempInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Comfort temperature", html_for="comfortTemp_id"),
-                    dbc.Input(type="number", id="comfortTemp_id", placeholder="Comfort temperature [°C]")
+                    dbc.Label("Comfort temperature [°C]", html_for="comfortTemp_id"),
+                    dbc.Input(type="number", id="comfortTemp_id", placeholder="Comfort temperature ")
                 ]),
-        width=6)
+        )
 
 internalGainsInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Internal Gains", html_for="internalGains_id"),
-                    dbc.Input(type="number", id="internalGains_id", placeholder="Internal gains [W/m^2]")
+                    dbc.Label("Internal Gains [W/m^2]", html_for="internalGains_id"),
+                    dbc.Input(type="number", id="internalGains_id", placeholder="Internal gains ")
                 ]),
-        width=6)
+        )
 
 infVentInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Infiltration and ventilation number", html_for="infVentNumber_id"),
-                    dbc.Input(type="number", id="infVentNumber_id", placeholder="Infiltration and ventilation number [1/h]")
-                ]),
-        width=6)
+                    dbc.Label("Infiltration and ventilation number [1/h]", html_for="infVentNumber_id"),
+                    dbc.Input(type="number", id="infVentNumber_id", placeholder="Infiltration and ventilation number")])
+                )
 
 
-input = dbc.Row([
-            comfTempInput,
-            internalGainsInput,
-            infVentInput,
-            ],form=True
+input = html.Div([
+                comfTempInput,
+                internalGainsInput,
+                infVentInput,
+            ], 
 )
 
 output = html.Div("", id = "occupancy_output_id")

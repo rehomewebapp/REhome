@@ -6,31 +6,31 @@ from views.templates.createLayout import create_layout
 
 uFacadeInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Heat transfer coefficient of the facade (U-value)", html_for="u_facade_id"),
-                    dbc.Input(type="number", id="u_facade_id", placeholder="U-value facade [W/m^2K]")
+                    dbc.Label("Heat transfer coefficient of the facade (U-value) [W/m^2K]", html_for="u_facade_id"),
+                    dbc.Input(type="number", id="u_facade_id", placeholder="U-value facade ")
                 ]),
-        width=6)
+        )
 
 uRoofInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Heat transfer coefficient of the roof (U-value)", html_for="u_roof_id"),
-                    dbc.Input(type="number", id="u_roof_id", placeholder="U-value roof [W/m^2K]")
+                    dbc.Label("Heat transfer coefficient of the roof (U-value) [W/m^2K]", html_for="u_roof_id"),
+                    dbc.Input(type="number", id="u_roof_id", placeholder="U-value roof ")
                 ]),
-        width=6)
+        )
 
 uFloorInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Heat transfer coefficient of the floor (U-value)", html_for="u_floor_id"),
-                    dbc.Input(type="number", id="u_floor_id", placeholder="U-value floor [W/m^2K]")
+                    dbc.Label("Heat transfer coefficient of the floor (U-value) [W/m^2K]", html_for="u_floor_id"),
+                    dbc.Input(type="number", id="u_floor_id", placeholder="U-value floor ")
                 ]),
-        width=6)
+        )
 
 
-input = dbc.Row([
+input = html.Div([
             uFacadeInput,
             uRoofInput,
             uFloorInput,
-            ],form=True
+            ]
 )
 
 
