@@ -6,4 +6,4 @@ geopy
 pyproj
 requests
 pandas
-yaml
+yaml = 0.2.5
