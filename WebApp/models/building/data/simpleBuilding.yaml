@@ -1,56 +1,55 @@
-building :
-  id : simpleBuilding
-  location :
-    latitude: 52.42827       # Latitude [decimal degrees]
-    longitude: 12.88733
-  weatherFile : default_weather.json
-  groundArea : 100
-  nStorys : 2
-  thZones :
-    livingSpace :
-      volume : 500
-      storyHeight : 2.5
-      floorArea : 200
-      heated : True
-      tempIn : 20
-      gainsInt : 5
-      nInf : 0.2
-      nVent : 0.3
-      opaquePlanes :
-        facade :
-          adjTZ : ambient
-          uValue : 0.25
-          area : 190
-        floor :
-          adjTZ : ground
-          uValue : 0.2
-          area : 100
-        roof :
-          adjTZ : ambient
-          uValue : 0.2
-          area : 100
-      transPlanes :
-        windowA :
-          uValue : 2
-          area : 2.5
-          gValue : 0.5
-          tilt : 90
-          azimuth : 0 #north
-        windowB :
-          uValue : 2
-          area : 2.5
-          gValue : 0.5
-          tilt : 90
-          azimuth : 90 #east
-        windowC :
-          uValue : 2
-          area : 2.5
-          gValue : 0.5
-          tilt : 90
-          azimuth : 180 #south
-        windowD :
-          uValue : 2
-          area : 2.5
-          gValue : 0.5
-          tilt : 90
-          azimuth : 270 #west
+id : simpleBuilding
+location :
+  latitude: 52.42827       # Latitude [decimal degrees]
+  longitude: 12.88733
+weatherFile : default_weather.json
+groundArea : 100
+nStorys : 2
+thZones :
+  livingSpace :
+    volume : 500
+    storyHeight : 2.5
+    floorArea : 200
+    heated : True
+    tempIn : 20
+    gainsInt : 5
+    nInf : 0.2
+    nVent : 0.3
+    opaquePlanes :
+      facade :
+        adjTZ : ambient
+        uValue : 0.25
+        area : 190
+      floor :
+        adjTZ : ground
+        uValue : 0.2
+        area : 100
+      roof :
+        adjTZ : ambient
+        uValue : 0.2
+        area : 100
+    transPlanes :
+      windowA :
+        uValue : 2
+        area : 2.5
+        gValue : 0.5
+        tilt : 90
+        azimuth : 0 #north
+      windowB :
+        uValue : 2
+        area : 2.5
+        gValue : 0.5
+        tilt : 90
+        azimuth : 90 #east
+      windowC :
+        uValue : 2
+        area : 2.5
+        gValue : 0.5
+        tilt : 90
+        azimuth : 180 #south
+      windowD :
+        uValue : 2
+        area : 2.5
+        gValue : 0.5
+        tilt : 90
+        azimuth : 270 #west

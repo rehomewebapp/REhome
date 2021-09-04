@@ -1,0 +1,69 @@
+groundArea: 100
+floorPlan: 
+  - 
+    - 52.43059113069196 
+    - 12.903382033109665
+  - 
+    - 52.430609937811035
+    - 12.903549671173097
+  - 
+    - 52.43053143847825
+    - 12.903571128845217 
+  - 
+    - 52.43051304017688
+    - 12.90340282022953
+
+id: simpleBuilding
+location:
+  latitude: 52.43059 
+  longitude: 12.90338
+nStorys: 2
+thZones:
+  livingSpace:
+    floorArea: 200
+    gainsInt: 5
+    heated: true
+    nInf: 0.2
+    nVent: 0.3
+    opaquePlanes:
+      facade:
+        adjTZ: ambient
+        area: 190
+        uValue: 0.25
+      floor:
+        adjTZ: ground
+        area: 100
+        uValue: 0.2
+      roof:
+        adjTZ: ambient
+        area: 100
+        uValue: 0.2
+    storyHeight: 2.5
+    tempIn: 20
+    transPlanes:
+      windowA:
+        area: 2.5
+        azimuth: 0
+        gValue: 0.5
+        tilt: 90
+        uValue: 2
+      windowB:
+        area: 2.5
+        azimuth: 90
+        gValue: 0.5
+        tilt: 90
+        uValue: 2
+      windowC:
+        area: 2.5
+        azimuth: 180
+        gValue: 0.5
+        tilt: 90
+        uValue: 2
+      windowD:
+        area: 2.5
+        azimuth: 270
+        gValue: 0.5
+        tilt: 90
+        uValue: 2
+    volume: 500
+weatherFile: default_weather.json

@@ -5,7 +5,7 @@ import dash_leaflet as dl
 
 from app import app
 from models.building import utilities
-from models.building.buildingFactory import read_building_data, save_building_data
+from models.building.buildingFactory import read_building_data_yaml, save_building_data_yaml
 
 # create marker and change button style
 @app.callback(
@@ -16,8 +16,11 @@ from models.building.buildingFactory import read_building_data, save_building_da
     )
 def map_click(click_lat_lng):
     if click_lat_lng == None:
-        raise PreventUpdate()
-    marker = [dl.Marker(position=click_lat_lng)]
+        location = list(read_building_data_yaml('userID')['location'].values())
+        marker = dl.Marker(position=location)
+        #raise PreventUpdate()
+    else:
+        marker = [dl.Marker(position=click_lat_lng)]
     return marker, False, "success"
 
 
@@ -32,12 +35,12 @@ def handle_location(n_clicks, loc):
         raise PreventUpdate()
     if n_clicks == 0:
         return ''
-    building = read_building_data('userID')
+    building = read_building_data_yaml('userID')
     building["location"] = {
         "latitude": loc[0],
         "longitude": loc[1],
     }
-    save_building_data(building)
+    save_building_data_yaml(building)
 
     data = utilities.get_tmy_data(loc[0],loc[1])
     utilities.save_tmy_data(data)

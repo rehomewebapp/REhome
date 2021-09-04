@@ -7,14 +7,6 @@ import yaml
 #data_path = Path("models","building","data")
 data_path = Path()
 
-def createBuilding():
-    building = {
-    #"id": randint(0,1e9),
-    "id" : "userID",
-    'thZones' : {'tz0':{'opaquePlanes':{'roof':{},'facade':{},'floor':{}}}}
-    }
-    return building
-
 
 def save_building_data(building, filepath = data_path):
     """Save the building parameters in a json file.

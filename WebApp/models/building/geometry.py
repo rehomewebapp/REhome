@@ -9,7 +9,7 @@ import csv
 
 data_path = "WebApp/models/building/data/"
 
-def floorplane_from_geopolygone(polygone):
+def area_from_geopolygone(polygone):
     """Calculate the area of a geopolygone.
     """
     # split polygone into list with lats and lons

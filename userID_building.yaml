@@ -1,0 +1,65 @@
+floorPlan:
+- - 52.43062710952147
+  - 12.903257310390474
+- - 52.43072850424657
+  - 12.903517484664919
+- - 52.43058949528993
+  - 12.903654277324678
+- - 52.4305437040082
+  - 12.903453111648561
+groundArea: 286.78
+id: userID
+location:
+  latitude: 52.43059
+  longitude: 12.90338
+nStorys: 2
+perimeter: 69.87
+thZones:
+  livingSpace:
+    floorArea: 200
+    gainsInt: 5
+    heated: true
+    nInf: 0.2
+    nVent: 0.3
+    opaquePlanes:
+      facade:
+        adjTZ: ambient
+        area: 190
+        uValue: 0.25
+      floor:
+        adjTZ: ground
+        area: 100
+        uValue: 0.2
+      roof:
+        adjTZ: ambient
+        area: 100
+        uValue: 0.2
+    storyHeight: 2.5
+    tempIn: 20
+    transPlanes:
+      windowA:
+        area: 2.5
+        azimuth: 0
+        gValue: 0.5
+        tilt: 90
+        uValue: 2
+      windowB:
+        area: 2.5
+        azimuth: 90
+        gValue: 0.5
+        tilt: 90
+        uValue: 2
+      windowC:
+        area: 2.5
+        azimuth: 180
+        gValue: 0.5
+        tilt: 90
+        uValue: 2
+      windowD:
+        area: 2.5
+        azimuth: 270
+        gValue: 0.5
+        tilt: 90
+        uValue: 2
+    volume: 500
+weatherFile: default_weather.json

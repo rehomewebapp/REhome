@@ -14,16 +14,16 @@ icon = {
     "iconAnchor": [24, 24],  # Anchor of the icon 
 }
 
-
 content = html.Div(children=[
     dl.Map(id = "floorplan_map",
         children=[
                 dl.TileLayer(maxZoom = 21, maxNativeZoom = 19),
                 dl.GestureHandling(), 
-                dl.Marker(id="marker_id", position = dummy_pos, icon=icon, interactive=False), # Start Marker
-                dl.Polyline(id="polyline-id", positions=[dummy_pos]),  # Create a polyline
+                #dl.Marker(id="marker_id", position = dummy_pos, icon=icon, interactive=False), # Start Marker
+                #dl.Polyline(id="polyline-id", positions=[dummy_pos]),  # Create a polyline
                 dl.ScaleControl(), # adds scale in bottom left corner
-                dl.Polygon(id="polygon-id", positions=[dummy_pos]),  # Create a polygon
+                dl.LayerGroup(id="layer_floorplan_map")
+                #dl.Polygon(id="polygon-id", positions=[dummy_pos]),  # Create a polygon
             ],
         style={'width': '100%', 'height': '50vh', 'margin': "auto","padding-right":"15px", "display": "block", "position": "relative"}
     ),
