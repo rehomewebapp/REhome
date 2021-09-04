@@ -1,26 +1,24 @@
 floorPlan:
-- - 52.43062710952147
-  - 12.903257310390474
-- - 52.43072850424657
-  - 12.903517484664919
-- - 52.43058949528993
-  - 12.903654277324678
-- - 52.4305437040082
-  - 12.903453111648561
-groundArea: 286.78
+- - 52.430448850487586
+  - 12.905032932758333
+- - 52.43054043320055
+  - 12.904228270053865
+- - 52.430699067092334
+  - 12.904737889766695
+groundArea: 659.68
 id: userID
 location:
   latitude: 52.43059
   longitude: 12.90338
 nStorys: 2
-perimeter: 69.87
+perimeter: 128.89
 thZones:
   livingSpace:
     floorArea: 200
-    gainsInt: 5
+    gainsInt: 2
     heated: true
-    nInf: 0.2
-    nVent: 0.3
+    nInf: 0
+    nVent: 1
     opaquePlanes:
       facade:
         adjTZ: ambient

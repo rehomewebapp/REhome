@@ -21,11 +21,15 @@ from models.building.buildingFactory import read_building_data_yaml, save_buildi
 def inputDone(comfortTemp, internalGains, infVentNumber):
     if comfortTemp == None and internalGains == None and infVentNumber == None:
         # ToDo make this more generic! dont use name of thZones, loop through zones instead and calc avg. temp of heatedzones
-        comfortTemp = read_building_data_yaml('userID')['thZones']['livingSpace']['tempIn']
-        internalGains = read_building_data_yaml('userID')['thZones']['livingSpace']['gainsInt']
-        infVentNumber = read_building_data_yaml('userID')['thZones']['livingSpace']['nVent']
+        building = read_building_data_yaml("userID")
+        comfortTemp = building['thZones']['livingSpace']['tempIn']
+        internalGains = building['thZones']['livingSpace']['gainsInt']
+        infVentNumber = building['thZones']['livingSpace']['nVent']
         return False, "success", comfortTemp, internalGains , infVentNumber
         #raise PreventUpdate()
+
+    if comfortTemp == None or internalGains == None or infVentNumber == None:
+        return True, "primary", comfortTemp, internalGains , infVentNumber
 
     # save u_values to building
     building = read_building_data_yaml(userID='userID')
