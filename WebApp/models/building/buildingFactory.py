@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 from random import randint
+import yaml
 
 #data_path = Path("models","building","data")
 data_path = Path()
@@ -30,6 +31,7 @@ def save_building_data(building, filepath = data_path):
     with open(filename, 'w') as f:
         json.dump(building, f)
 
+
 def read_building_data(userID, filepath = data_path):
     """Read the building parameters from a json file.
 
@@ -48,6 +50,37 @@ def read_building_data(userID, filepath = data_path):
 
     return building
 
+
+def read_building_data_yaml(userID, filepath = data_path):
+    """Read the building parameters from a yaml file.
+
+    Parameters
+    ----------
+    buildingID : str
+        ID of the building
+    filepath : pathlib Path
+        filepath where the yaml file is saved
+    """
+
+    filename = Path(filepath , userID + "_building.yaml")
+    with open (filename) as f:
+        data = yaml.load(f, Loader = yaml.FullLoader)
+    return data
+
+def save_building_data_yaml(building, filepath = data_path):
+    """Save the building parameters in a yaml file.
+
+    Parameters
+    ----------
+    building : dict
+        dictionary with building parameters
+    filepath : pathlib Path
+        filepath where the yaml file should be saved
+    """
+
+    filename = Path(filepath , str(building["id"]) + "_building.yaml")
+    with open(filename, 'w') as f:
+        yaml.dump(building, f)
 
 '''
 building = {
