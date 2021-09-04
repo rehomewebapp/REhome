@@ -21,7 +21,16 @@ def create_graph(df):
     ])
     fig.update_xaxes(title_text='')
     fig.update_yaxes(title_text='Heat flows [kWh/month]')
+
+    legend = dict(
+        orientation="h",
+        yanchor="bottom",
+        y=1.02,
+        xanchor="right",
+        x=1
+    )
+
     # Change the bar mode
-    fig.update_layout(barmode='relative', title_text='Heat flows', transition_duration= 1000)
+    fig.update_layout(barmode='relative', title_text='Heat flows', transition_duration= 1000, legend=legend, yaxis_tickformat = 'd')
     graph = dcc.Graph(figure=fig)
     return graph
