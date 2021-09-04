@@ -1,5 +1,5 @@
 import unittest
-from WebApp.models.building.geometry import floorplane_from_geopolygone, perimeter_from_geopolygone, facade_area, height_from_story
+from WebApp.models.building.geometry import area_from_geopolygone, perimeter_from_geopolygone, facade_area, height_from_story
 
 class TestGeometry(unittest.TestCase):
 
@@ -10,7 +10,7 @@ class TestGeometry(unittest.TestCase):
             [48.00605663323576, 8.03785488009453],
             [48.00613200375274, 8.037684559822084],
         ]
-        area = floorplane_from_geopolygone(polygone)
+        area = area_from_geopolygone(polygone)
         self.assertEqual(area,216.78)
 
     def test_conv_geopolygone_from_perimeter(self):
