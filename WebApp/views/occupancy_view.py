@@ -17,17 +17,22 @@ internalGainsInput = dbc.Col(
                 ]),
         )
 
-infVentInput = dbc.Col(
+infInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Infiltration and ventilation number [1/h]", html_for="infVentNumber_id"),
-                    dbc.Input(type="number", id="infVentNumber_id", placeholder="Infiltration and ventilation number")])
+                    dbc.Label("Infiltration number [1/h]", html_for="infNumber_id"),
+                    dbc.Input(type="number", id="infNumber_id", placeholder="Infiltration number")])
                 )
-
+ventInput = dbc.Col(
+                dbc.FormGroup([
+                    dbc.Label("Ventilation number [1/h]", html_for="ventNumber_id"),
+                    dbc.Input(type="number", id="ventNumber_id", placeholder="Ventilation number")])
+                )
 
 input = html.Div([
                 comfTempInput,
                 internalGainsInput,
-                infVentInput,
+                infInput,
+                ventInput,
             ], 
 )
 
