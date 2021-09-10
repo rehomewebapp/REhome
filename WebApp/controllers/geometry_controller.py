@@ -14,7 +14,7 @@ from models.building.buildingFactory import read_building_data_yaml, save_buildi
     Output("story_height_id", "value"),
     Input("n_storys_id", "value"),
     Input("story_height_id", "value"),
-    Input("geometry_done_button_id", "n_clicks")
+    Input("geometry_done_button_id", "n_clicks"),
 )
 def inputDone(n_storys, story_height, clicks):
     ctx = callback_context
@@ -46,6 +46,8 @@ def inputDone(n_storys, story_height, clicks):
         facadearea = geometry.facade_area(perimeter, height)
 
         # TODO! calculate window area and subtract from facade area
+        building['nStorys'] = n_storys
+        building['thZones']['livingSpace']['storyHeight'] = story_height
         building['thZones']['livingSpace']['opaquePlanes']['facade']['area'] = facadearea
         building['thZones']['livingSpace']['opaquePlanes']['roof']['area'] = groundArea
         building['thZones']['livingSpace']['opaquePlanes']['floor']['area'] = groundArea

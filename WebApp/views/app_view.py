@@ -12,6 +12,11 @@ from views.floorplan_view import content as floorplan_content
 from views.geometry_view import content as geometry_content
 from views.materials_view import content as materials_content
 
+from views.weather_view import content as weather_content
+from views.heatDemand_view import content as heatDemand_content
+
+#INPUT TABS
+
 location_tab_content = dbc.Card(
     dbc.CardBody([
         location_content,
@@ -59,7 +64,21 @@ input_tabs = dbc.Tabs(
             active_tab="location_tab_id",
         )
 
- 
+
+# OUTPUT TABS
+
+weather_tab_content = dbc.Card(
+    dbc.CardBody([
+        weather_content,
+        ]),className="mt-3",
+)
+
+heatDemand_tab_content = dbc.Card(
+    dbc.CardBody([
+        heatDemand_content,
+        ]),className="mt-3",
+)
+
 output_tabs = dbc.Tabs(
             [
                 dbc.Tab( label="Weather", tab_id="weather_tab_id"),
@@ -67,7 +86,7 @@ output_tabs = dbc.Tabs(
                 
             ],
             id="output_tabs",
-            active_tab="weather_tab_id",
+            active_tab="heatDemand_tab_id",
         )
 
 layout = html.Div([
@@ -82,10 +101,8 @@ layout = html.Div([
 
 
 
-
 @app.callback(
     Output("input_content", "children"), 
-    #Output("input_tabs", "active_tab"),
     Input("input_tabs", "active_tab"),
 )
 def switch_tab(at):
@@ -101,4 +118,15 @@ def switch_tab(at):
         return  materials_tab_content
     return html.P("This shouldn't ever be displayed...")
 
+
+@app.callback(
+    Output("output_content", "children"), 
+    Input("output_tabs", "active_tab"),
+)
+def switch_tab(at):
+    if at == "weather_tab_id":
+        return  weather_tab_content
+    elif at == "heatDemand_tab_id":
+        return  heatDemand_tab_content
+    return html.P("This shouldn't ever be displayed...")
 

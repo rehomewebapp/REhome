@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 
 
 
-def create_graph(df):
+def create_bar_graph(df):
     months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     data = df.groupby(pd.Grouper(freq='M')).sum()/1000
     data['Qflow_int'] = data['Qflow_int'] * -1
