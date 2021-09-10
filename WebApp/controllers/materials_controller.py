@@ -1,16 +1,18 @@
+from app import app
 from dash.dependencies import Input, Output
+from dash import callback_context
+
 import pandas as pd
 import datetime
-from app import app
-from models.building import physics, geometry
-from dash.exceptions import PreventUpdate
+
+from models.building import physics
 from models.building.buildingFactory import save_building_data_yaml, read_building_data_yaml
 from models.building.utilities import read_tmy_data
 from views.templates.graphs import create_graph
 
 
 @app.callback(
-    Output("materials_output_id","children"),
+    #Output("materials_output_id","children"),
     Output('materials_done_button_id', 'disabled'), 
     Output('materials_done_button_id', 'color'),
     Output("u_facade_id", "value"),
@@ -19,40 +21,48 @@ from views.templates.graphs import create_graph
     Input("u_facade_id", "value"),
     Input("u_roof_id", "value"),
     Input("u_floor_id", "value"),
+    Input("materials_done_button_id", "n_clicks")
 )
-def handle_facade(u_facade, u_roof, u_floor):
+def inputDone(u_facade, u_roof, u_floor, n_clicks):
 
-    if u_facade == None and u_roof == None and u_floor == None:
+    ctx = callback_context
+    # check which input has triggered the callback
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    # on pageload: fill input fields with building data
+    if not ctx.triggered:
         building = read_building_data_yaml("userID")
         u_facade = building['thZones']['livingSpace']['opaquePlanes']['facade']['uValue']
         u_roof = building['thZones']['livingSpace']['opaquePlanes']['roof']['uValue']
         u_floor = building['thZones']['livingSpace']['opaquePlanes']['floor']['uValue']
-        graph = prepare_graph(u_facade, u_roof, u_floor)
-        return [graph], False, "success", u_facade, u_roof, u_floor
-
+        #graph = prepare_graph(u_facade, u_roof, u_floor)
+        return False, "success", u_facade, u_roof, u_floor
+    
+    # disable button if one input field is empty
     if u_facade == None or u_roof == None or u_floor == None:
         if u_facade == None: u_facade = 0
         if u_roof == None: u_roof = 0
         if u_floor == None: u_floor = 0
-        graph = prepare_graph(u_facade, u_roof, u_floor)
+        #graph = prepare_graph(u_facade, u_roof, u_floor)
         if u_facade == 0: u_facade = None
         if u_roof == 0: u_roof = None
         if u_floor == 0: u_floor = None
-        return [graph], True, "primary", u_facade, u_roof, u_floor
+        return True, "primary", u_facade, u_roof, u_floor
 
-    # save u_values to building
-    building = read_building_data_yaml(userID='userID')
-    building['thZones']['livingSpace']['opaquePlanes']['facade']['uValue'] = u_facade
-    building['thZones']['livingSpace']['opaquePlanes']['roof']['uValue'] = u_roof
-    building['thZones']['livingSpace']['opaquePlanes']['floor']['uValue'] = u_floor
-    save_building_data_yaml(building)
+    # save u_values to building on button click
+    if button_id == "materials_done_button_id":
+        building = read_building_data_yaml(userID='userID')
+        building['thZones']['livingSpace']['opaquePlanes']['facade']['uValue'] = u_facade
+        building['thZones']['livingSpace']['opaquePlanes']['roof']['uValue'] = u_roof
+        building['thZones']['livingSpace']['opaquePlanes']['floor']['uValue'] = u_floor
+        save_building_data_yaml(building)
     
-    graph = prepare_graph(u_facade, u_roof, u_floor)
+        #graph = prepare_graph(u_facade, u_roof, u_floor)
+        return False, "success", u_facade, u_roof, u_floor
 
-
-    return [graph], False, "success", u_facade, u_roof, u_floor
-
-
+    # activate button if all inputs are filled
+    else:
+        return False, "primary", u_facade, u_roof, u_floor
 
 def prepare_graph(u_facade, u_roof, u_floor):
 

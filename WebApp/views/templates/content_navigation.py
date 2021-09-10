@@ -3,8 +3,6 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 
 def create_content_nav(activePage, url_prev, text, url_next):
-
-
     if url_prev:
         prev_button = dbc.Col([html.P(dbc.Button("Back", color="success", href=url_prev, id="prev_button_id"))], style={"text-align" : "left"})
     else:

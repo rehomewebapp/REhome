@@ -1,6 +1,7 @@
 from app import app
-from dash.dependencies import Input, Output, State
-from dash.exceptions import PreventUpdate
+from dash.dependencies import Input, Output
+from dash import callback_context
+
 import dash_leaflet as dl
 
 from models.building.buildingFactory import read_building_data_yaml, save_building_data_yaml
@@ -28,12 +29,19 @@ dlatlon2 = 1e-10  # Controls tolerance of closing click
 floorplanClosed = True
 
 # callback for drawing the floorplan
-@app.callback([Output("layer_floorplan_map","children"),
-               Output('floorplan_done_button_id', 'disabled'), 
-               Output('floorplan_done_button_id', 'color')],
-              [Input("floorplan_map", "click_lat_lng")])
+@app.callback(Output("layer_floorplan_map","children"),
+              Output('floorplan_done_button_id', 'disabled'), 
+              Output('floorplan_done_button_id', 'color'),
+              Input("floorplan_map", "click_lat_lng"),
+              #Input("floorplan_done_button_id", "n_clicks"),
+              )
 def update_polyline_and_polygon(click_lat_lng):
     global floorplanClosed
+    '''
+    ctx = callback_context
+    # check which input has triggered the callback
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0]
+    '''
     # load initial floorplan from file
     building = read_building_data_yaml('userID')
     first_position = building['floorPlan'][0]
@@ -53,7 +61,11 @@ def update_polyline_and_polygon(click_lat_lng):
             save_building_data_yaml(building)
             floorplanClosed = False
             return start_marker, True, "primary"
-
+    '''
+    if button_id == "occupancy_done_button_id":
+        print('saving')
+        save_building_data_yaml(building)
+    '''
     # If the click is close to the first point, close the polygon and save floorplan information 
     dist2 = (positions[0][0] - click_lat_lng[0]) ** 2 + (positions[0][1] - click_lat_lng[1]) ** 2
     if dist2 < dlatlon2:
@@ -74,6 +86,7 @@ def update_polyline_and_polygon(click_lat_lng):
         save_building_data_yaml(building)
         floorplanClosed = False
         return polyline, True, "primary"
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

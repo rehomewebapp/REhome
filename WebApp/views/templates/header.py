@@ -35,3 +35,17 @@ def create_navbar(active_page):
         )
 
     return navbar
+
+navbar = dbc.Navbar(
+    [
+        html.A(
+            dbc.Row(
+                [   
+                    dbc.Col(html.Img(src=REHOME_LOGO, height="48px")),
+                ],
+                align="center",
+            ),
+            href="/",
+        ),
+    ],color="primary", dark=True,
+)
