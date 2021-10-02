@@ -47,19 +47,13 @@ def prepare_graph():
                                         tempIn = temp_comfort,
                                         tempAmb = tempAmb)
 
-
     graph = create_bar_graph(df)
     return graph
 
 
 @app.callback(
-    #Output("materials_output_id","children"),
     Output('heatDemand_content_id', 'children'),
-    #Input("location_done_button_id", "n_clicks"),
-    #Input("occupancy_done_button_id", "n_clicks"),
-    #Input("floorplan_done_button_id", "n_clicks"),
-    #Input("geometry_done_button_id", "n_clicks"),
-    Input("materials_done_button_id", "n_clicks"),
+    Input("update_graphs_button_id", "n_clicks"),
 )
 #def inputDone(location_clicks, occupancy_clicks, floorplan_clicks, geometry_clicks, materials_clicks):
 def inputDone(n_clicks):
