@@ -20,36 +20,56 @@ from views.heatDemand_view import content as heatDemand_content
 location_tab_content = dbc.Card(
     dbc.CardBody([
         location_content,
-        dbc.Button("Save", color="primary", id="location_done_button_id", n_clicks=0, disabled=True),
-        ]),className="mt-3",
+        dbc.Row([
+            dbc.Col([
+                dbc.Button("Save", color="primary", id="location_done_button_id", n_clicks=0, disabled=True),
+            ], style = {"text-align":"right"})
+        ]),
+    ]),className="mt-3",
 )
 
 occupancy_tab_content = dbc.Card(
     dbc.CardBody([
-            occupancy_content,
-            dbc.Button("Save", color="primary", id="occupancy_done_button_id", disabled=True),
-        ]),className="mt-3",
+        occupancy_content,
+        dbc.Row([
+            dbc.Col([
+                dbc.Button("Save", color="primary", id="occupancy_done_button_id", disabled=True),
+            ], style = {"text-align":"right"})
+        ]),
+    ]),className="mt-3",
 )
 
 floorplan_tab_content = dbc.Card(
     dbc.CardBody([
-            floorplan_content,
-            dbc.Button("Save", color="primary", id="floorplan_done_button_id", disabled=True),
-        ]),className="mt-3",
+        floorplan_content,
+        dbc.Row([
+            dbc.Col([
+                dbc.Button("Save", color="primary", id="floorplan_done_button_id", disabled=True),
+            ], style = {"text-align":"right"})
+        ]),
+    ]),className="mt-3",
 )
 
 geometry_tab_content = dbc.Card(
     dbc.CardBody([
-            geometry_content,
-            dbc.Button("Save", color="primary", id="geometry_done_button_id", disabled=True),
-        ]),className="mt-3",
+        geometry_content,
+        dbc.Row([
+            dbc.Col([
+                dbc.Button("Save", color="primary", id="geometry_done_button_id", disabled=True),
+            ], style = {"text-align":"right"})
+        ]),
+    ]),className="mt-3",
 )
 
 materials_tab_content = dbc.Card(
     dbc.CardBody([
-            materials_content,
-            dbc.Button("Save", color="primary", id="materials_done_button_id", disabled=True),
-        ]),className="mt-3",
+        materials_content,
+        dbc.Row([
+            dbc.Col([
+                dbc.Button("Save", color="primary", id="materials_done_button_id", disabled=True),
+            ], style = {"text-align":"right"})
+        ]),
+    ]),className="mt-3",
 )
 
 input_tabs = dbc.Tabs(
@@ -90,7 +110,7 @@ output_tabs = dbc.Tabs(
 
 output_tabs_bar = dbc.Row(children= [
     dbc.Col(output_tabs),
-    dbc.Col(dbc.Button("Update", color="primary", id="update_graphs_button_id"),style={"text-align":"right"})
+    dbc.Col(dbc.Button("Update", color="primary", id="update_graphs_button_id"),style={"text-align":"right", "margin-right":"20px"})
 ])
 
 '''
