@@ -83,22 +83,42 @@ output_tabs = dbc.Tabs(
             [
                 dbc.Tab( label="Weather", tab_id="weather_tab_id"),
                 dbc.Tab( label="Heat demand", tab_id="heatDemand_tab_id"),
-                
+                #dbc.Tab( label = "Update",tab_id="update_graphs"),
             ],
             id="output_tabs",
-            active_tab="heatDemand_tab_id",
+            active_tab="weather_tab_id",
         )
+
+output_tabs_bar = dbc.Row(children= [
+    dbc.Col(output_tabs),
+    dbc.Col(dbc.Button("Update", color="primary", id="update_graphs_button_id"),style={"text-align":"right"})
+])
+
+'''
+# HAcki way to make all submit buttons available - 
+
+hidden_submit_buttons = html.Div([
+    html.Button('Button', id='geometry_done_button_id', hidden=False),
+    html.Button('Button', id='materials_done_button_id', hidden=False),
+])
+
+    #Input("location_done_button_id", "n_clicks"),
+    #Input("occupancy_done_button_id", "n_clicks"),
+    #Input("floorplan_done_button_id", "n_clicks"),
+    Input("geometry_done_button_id", "n_clicks"),
+    Input("materials_done_button_id", "n_clicks"),
+'''
 
 layout = html.Div([
         navbar,
         input_tabs,
         html.Div(id="input_content"),
-        output_tabs,
+        output_tabs_bar,
         html.Div(id="output_content"),
         footer,
+        #hidden_submit_buttons,
     ]
 )
-
 
 
 @app.callback(
@@ -128,5 +148,8 @@ def switch_tab(at):
         return  weather_tab_content
     elif at == "heatDemand_tab_id":
         return  heatDemand_tab_content
+    elif at == "update_graphs_button_id":
+        print("update output graph button has been pressed")
+        raise PreventUpdate
     return html.P("This shouldn't ever be displayed...")
 

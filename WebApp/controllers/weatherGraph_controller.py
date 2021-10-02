@@ -31,7 +31,7 @@ def make_weather_graph(df):
 
 @app.callback(
     Output('weatherGraph_content_id', 'children'),
-    Input("update_weather_button_id", "n_clicks"),
+    Input("update_graphs_button_id", "n_clicks"),
 )
 def update_weather_graph(n_clicks):
     df = read_tmy_data()
