@@ -35,7 +35,6 @@ def map_click(click_lat_lng, n_clicks, click_lat_lng_state):
         return marker, False, "primary"
     # handle save button
     elif button_id == "location_done_button_id":
-        print("save button pressed")
         building = read_building_data_yaml('userID')
         building["location"] = {
             "latitude": click_lat_lng_state[0],
@@ -45,7 +44,7 @@ def map_click(click_lat_lng, n_clicks, click_lat_lng_state):
         marker = [dl.Marker(position=click_lat_lng)]
 
         # download weather data and save
-        data = utilities.get_tmy_data(loc[0],loc[1])
+        data = utilities.get_tmy_data(click_lat_lng_state[0],click_lat_lng_state[1])
         utilities.save_tmy_data(data)
         return marker, False, "success"
     else: 
