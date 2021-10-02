@@ -83,7 +83,6 @@ output_tabs = dbc.Tabs(
             [
                 dbc.Tab( label="Weather", tab_id="weather_tab_id"),
                 dbc.Tab( label="Heat demand", tab_id="heatDemand_tab_id"),
-                #dbc.Tab( label = "Update",tab_id="update_graphs"),
             ],
             id="output_tabs",
             active_tab="weather_tab_id",
@@ -148,8 +147,5 @@ def switch_tab(at):
         return  weather_tab_content
     elif at == "heatDemand_tab_id":
         return  heatDemand_tab_content
-    elif at == "update_graphs_button_id":
-        print("update output graph button has been pressed")
-        raise PreventUpdate
     return html.P("This shouldn't ever be displayed...")
 
