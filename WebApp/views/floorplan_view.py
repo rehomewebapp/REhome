@@ -25,7 +25,13 @@ content = html.Div(children=[
                 dl.LayerGroup(id="layer_floorplan_map")
                 #dl.Polygon(id="polygon-id", positions=[dummy_pos]),  # Create a polygon
             ],
-        style={'width': '100%', 'height': '50vh', 'margin': "auto","padding-right":"15px", "display": "block", "position": "relative"}
+        #style={'width': '100%', 'height': '50vh', 'margin': "auto","padding-right":"15px", "display": "block", "position": "relative"}
+        style={'width': '100%', 
+            'height': 'calc( 50vh - 5.4rem)', 
+            'margin': "auto", 
+            "display": "flex",
+            "position": "relative"
+             }
     ),
     html.Div(id = "area_output", children=""),
     html.Div(id = "hidden_div_id"), # used to trigger "pageload event" see floorplan_controller.py

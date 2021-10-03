@@ -14,15 +14,14 @@ content = html.Div(children=[
             dl.LayerGroup(id="layer"), # add layer for the marker
         ],
         style={'width': '100%', 
-            'height': '50vh', 
+            'height': 'calc( 50vh - 5.4rem)', 
             'margin': "auto", 
-            "display": "block",
-             "position": "relative"
+            "display": "flex",
+            "position": "relative"
              }
 
     ),
     html.Div(id = "location_output", children=""),
 ])
-
 
 layout = create_layout("location", "", "Click to place a marker on your home", "/occupancy", content)

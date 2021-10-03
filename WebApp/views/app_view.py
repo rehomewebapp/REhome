@@ -20,56 +20,41 @@ from views.heatDemand_view import content as heatDemand_content
 location_tab_content = dbc.Card(
     dbc.CardBody([
         location_content,
-        dbc.Row([
-            dbc.Col([
-                dbc.Button("Save", color="primary", id="location_done_button_id", n_clicks=0, disabled=True),
-            ], style = {"text-align":"right"})
-        ]),
-    ]),className="mt-3",
+        dbc.Button("Save", color="primary", id="location_done_button_id", n_clicks=0, disabled=True,
+            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+    ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
 occupancy_tab_content = dbc.Card(
     dbc.CardBody([
         occupancy_content,
-        dbc.Row([
-            dbc.Col([
-                dbc.Button("Save", color="primary", id="occupancy_done_button_id", disabled=True),
-            ], style = {"text-align":"right"})
-        ]),
-    ]),className="mt-3",
+        dbc.Button("Save", color="primary", id="occupancy_done_button_id", disabled=True,
+            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+    ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
 floorplan_tab_content = dbc.Card(
     dbc.CardBody([
         floorplan_content,
-        dbc.Row([
-            dbc.Col([
-                dbc.Button("Save", color="primary", id="floorplan_done_button_id", disabled=True),
-            ], style = {"text-align":"right"})
-        ]),
-    ]),className="mt-3",
+        dbc.Button("Save", color="primary", id="floorplan_done_button_id", disabled=True,
+            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+    ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
 geometry_tab_content = dbc.Card(
     dbc.CardBody([
         geometry_content,
-        dbc.Row([
-            dbc.Col([
-                dbc.Button("Save", color="primary", id="geometry_done_button_id", disabled=True),
-            ], style = {"text-align":"right"})
-        ]),
-    ]),className="mt-3",
+        dbc.Button("Save", color="primary", id="geometry_done_button_id", disabled=True,
+            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+    ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
 materials_tab_content = dbc.Card(
     dbc.CardBody([
         materials_content,
-        dbc.Row([
-            dbc.Col([
-                dbc.Button("Save", color="primary", id="materials_done_button_id", disabled=True),
-            ], style = {"text-align":"right"})
-        ]),
-    ]),className="mt-3",
+        dbc.Button("Save", color="primary", id="materials_done_button_id", disabled=True,
+            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+    ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
 input_tabs = dbc.Tabs(
@@ -82,21 +67,21 @@ input_tabs = dbc.Tabs(
             ],
             id="input_tabs",
             active_tab="location_tab_id",
+            style={"border-bottom":"0", "padding-left":"1.25rem"}
         )
 
 
 # OUTPUT TABS
-
 weather_tab_content = dbc.Card(
     dbc.CardBody([
         weather_content,
-        ]),className="mt-3",
+        ],style={"padding-top":"0"}),style = {"border":"0"}
 )
 
 heatDemand_tab_content = dbc.Card(
     dbc.CardBody([
         heatDemand_content,
-        ]),className="mt-3",
+        ],style={"padding-top":"0"}), style = {"border":"0"}
 )
 
 output_tabs = dbc.Tabs(
@@ -106,39 +91,30 @@ output_tabs = dbc.Tabs(
             ],
             id="output_tabs",
             active_tab="weather_tab_id",
+            style={"border-bottom":"0", "padding-left":"1.25rem"}
         )
 
 output_tabs_bar = dbc.Row(children= [
     dbc.Col(output_tabs),
-    dbc.Col(dbc.Button("Update", color="primary", id="update_graphs_button_id"),style={"text-align":"right", "margin-right":"20px"})
+    dbc.Col(dbc.Button("Update", color="primary", id="update_graphs_button_id", style={"padding-top":"0.5rem", "padding-bottom":"0.5rem"}),style={"text-align":"right", "margin-right":"20px"})
 ])
-
-'''
-# HAcki way to make all submit buttons available - 
-
-hidden_submit_buttons = html.Div([
-    html.Button('Button', id='geometry_done_button_id', hidden=False),
-    html.Button('Button', id='materials_done_button_id', hidden=False),
-])
-
-    #Input("location_done_button_id", "n_clicks"),
-    #Input("occupancy_done_button_id", "n_clicks"),
-    #Input("floorplan_done_button_id", "n_clicks"),
-    Input("geometry_done_button_id", "n_clicks"),
-    Input("materials_done_button_id", "n_clicks"),
-'''
 
 layout = html.Div([
-        navbar,
-        input_tabs,
-        html.Div(id="input_content"),
-        output_tabs_bar,
-        html.Div(id="output_content"),
-        footer,
-        #hidden_submit_buttons,
-    ]
-)
-
+        html.Div(id = "input_div", children = [
+            navbar,
+            input_tabs,
+            html.Div(id="input_content"),
+        ],style = {"height":"50vh"}),
+        html.Div(id = "output_div",children = [
+            output_tabs_bar,
+            html.Div(id="output_content"),
+            footer,
+        ],style = {"height":"50vh", 
+                   "display":"flex", 
+                   "flex-direction":"column",
+                   "justify-content":"space-between"}
+    ),
+])
 
 @app.callback(
     Output("input_content", "children"), 

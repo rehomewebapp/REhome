@@ -9,9 +9,6 @@ import numpy as np
 
 from models.building.utilities import read_tmy_data
 
-
-
-
 def make_weather_graph(df):
     fig = go.Figure(data=[go.Scatter(x=np.arange(len(df.index)), y=df.T2m)])
     fig.update_xaxes(title_text='')
@@ -25,8 +22,12 @@ def make_weather_graph(df):
         x=1
     )
     # Change the bar mode
-    fig.update_layout(transition_duration= 1000, legend=legend, yaxis_tickformat = 'd')
-    graph = dcc.Graph(figure=fig)
+    fig.update_layout(transition_duration= 1000, 
+                      legend=legend, 
+                      yaxis_tickformat = 'd',
+                      #margin=dict(l=0, r=0, t=0, b=0),
+                      )
+    graph = dcc.Graph(figure=fig, style={"height":"calc(50vh - 7.5rem)"})
     return graph
 
 @app.callback(

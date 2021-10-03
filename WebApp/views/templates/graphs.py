@@ -32,5 +32,5 @@ def create_bar_graph(df):
 
     # Change the bar mode
     fig.update_layout(barmode='relative', title_text='Heat flows', transition_duration= 1000, legend=legend, yaxis_tickformat = 'd')
-    graph = dcc.Graph(figure=fig)
+    graph = dcc.Graph(figure=fig, style={"height":"calc(50vh - 7.5rem)"})
     return graph

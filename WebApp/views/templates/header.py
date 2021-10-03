@@ -41,7 +41,7 @@ navbar = dbc.Navbar(
         html.A(
             dbc.Row(
                 [   
-                    dbc.Col(html.Img(src=REHOME_LOGO, height="48px")),
+                    dbc.Col(html.Img(src=REHOME_LOGO, style={"height":"2rem", "padding-left":"1rem"})),
                 ],
                 align="center",
             ),
