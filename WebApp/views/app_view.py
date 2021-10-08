@@ -104,12 +104,13 @@ layout = html.Div([
             navbar,
             input_tabs,
             html.Div(id="input_content"),
-        ],style = {"height":"50vh"}),
+        ],style = {"height":"48vh"}),
+        html.Hr(),
         html.Div(id = "output_div",children = [
             output_tabs_bar,
             html.Div(id="output_content"),
             footer,
-        ],style = {"height":"50vh", 
+        ],style = {"height":"48vh", 
                    "display":"flex", 
                    "flex-direction":"column",
                    "justify-content":"space-between"}

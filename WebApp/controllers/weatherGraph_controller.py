@@ -25,7 +25,7 @@ def make_weather_graph(df):
     fig.update_layout(transition_duration= 1000, 
                       legend=legend, 
                       yaxis_tickformat = 'd',
-                      #margin=dict(l=0, r=0, t=0, b=0),
+                      margin=dict(l=0, r=0, t=0, b=0),
                       )
     graph = dcc.Graph(figure=fig, style={"height":"calc(50vh - 7.5rem)"})
     return graph

@@ -14,7 +14,7 @@ content = html.Div(children=[
             dl.LayerGroup(id="layer"), # add layer for the marker
         ],
         style={'width': '100%', 
-            'height': 'calc( 50vh - 5.4rem)', 
+            'height': 'calc( 48vh - 5.4rem)', 
             'margin': "auto", 
             "display": "flex",
             "position": "relative"
