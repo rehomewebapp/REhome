@@ -12,12 +12,16 @@ from models.building.buildingFactory import save_building_data_yaml, read_buildi
     Output("u_facade_id", "value"),
     Output("u_roof_id", "value"),
     Output("u_floor_id", "value"),
+    Output("u_window_id", "value"),
+    Output("g_window_id", "value"),
     Input("u_facade_id", "value"),
     Input("u_roof_id", "value"),
     Input("u_floor_id", "value"),
+    Input("u_window_id", "value"),
+    Input("g_window_id", "value"),
     Input("materials_done_button_id", "n_clicks"),
 )
-def inputDone(u_facade, u_roof, u_floor, n_clicks):
+def inputDone(u_facade, u_roof, u_floor, u_window, g_window, n_clicks):
 
     ctx = callback_context
     # check which input has triggered the callback
@@ -29,18 +33,14 @@ def inputDone(u_facade, u_roof, u_floor, n_clicks):
         u_facade = building['thZones']['livingSpace']['opaquePlanes']['facade']['uValue']
         u_roof = building['thZones']['livingSpace']['opaquePlanes']['roof']['uValue']
         u_floor = building['thZones']['livingSpace']['opaquePlanes']['floor']['uValue']
-        return False, "success", u_facade, u_roof, u_floor
+        u_window = building['thZones']['livingSpace']['transPlanes']['windowA']['uValue']
+        g_window = building['thZones']['livingSpace']['transPlanes']['windowA']['gValue']
+        
+        return False, "success", u_facade, u_roof, u_floor, u_window, g_window
     
     # disable button if one input field is empty
-    if u_facade == None or u_roof == None or u_floor == None:
-        if u_facade == None: u_facade = 0
-        if u_roof == None: u_roof = 0
-        if u_floor == None: u_floor = 0
-        #graph = prepare_graph(u_facade, u_roof, u_floor)
-        if u_facade == 0: u_facade = None
-        if u_roof == 0: u_roof = None
-        if u_floor == 0: u_floor = None
-        return True, "primary", u_facade, u_roof, u_floor
+    if not u_facade or not u_roof or not u_floor or not u_window or not g_window:
+        return True, "primary", u_facade, u_roof, u_floor, u_window, g_window
 
     # save u_values to building on button click
     if button_id == "materials_done_button_id":
@@ -48,11 +48,16 @@ def inputDone(u_facade, u_roof, u_floor, n_clicks):
         building['thZones']['livingSpace']['opaquePlanes']['facade']['uValue'] = u_facade
         building['thZones']['livingSpace']['opaquePlanes']['roof']['uValue'] = u_roof
         building['thZones']['livingSpace']['opaquePlanes']['floor']['uValue'] = u_floor
+
+        for window in building['thZones']['livingSpace']['transPlanes']:
+            building['thZones']['livingSpace']['transPlanes'][window]['uValue'] = u_window
+            building['thZones']['livingSpace']['transPlanes'][window]['gValue'] = g_window
+
         save_building_data_yaml(building)
     
-        return False, "success", u_facade, u_roof, u_floor
+        return False, "success", u_facade, u_roof, u_floor, u_window, g_window
 
     # activate button if all inputs are filled
     else:
-        return False, "primary", u_facade, u_roof, u_floor
+        return False, "primary", u_facade, u_roof, u_floor, u_window, g_window
 

@@ -6,32 +6,55 @@ from views.templates.createLayout import create_layout
 
 uFacadeInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Heat transfer coefficient of the facade (U-value) [W/m^2K]", html_for="u_facade_id"),
+                    dbc.Label("Facade", html_for="u_facade_id"),
                     dbc.Input(type="number", id="u_facade_id", placeholder="U-value facade ")
-                ]),
+                ]), width = 4
         )
 
 uRoofInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Heat transfer coefficient of the roof (U-value) [W/m^2K]", html_for="u_roof_id"),
+                    dbc.Label("Roof", html_for="u_roof_id"),
                     dbc.Input(type="number", id="u_roof_id", placeholder="U-value roof ")
-                ]),
+                ]), width = 4
         )
 
 uFloorInput = dbc.Col(
                 dbc.FormGroup([
-                    dbc.Label("Heat transfer coefficient of the floor (U-value) [W/m^2K]", html_for="u_floor_id"),
+                    dbc.Label("Floor", html_for="u_floor_id"),
                     dbc.Input(type="number", id="u_floor_id", placeholder="U-value floor ")
-                ]),
+                ]), width = 4
+        )
+
+uWindowInput = dbc.Col(
+                dbc.FormGroup([
+                    dbc.Label("U-value [W/(m²K)]", html_for="u_window_id"),
+                    dbc.Input(type="number", id="u_window_id", placeholder="U-value window ")
+                ]), width = 6
+        )
+
+gWindowInput = dbc.Col(
+                dbc.FormGroup([
+                    dbc.Label("g-value [-]", html_for="g_window_id"),
+                    dbc.Input(type="number", id="g_window_id", placeholder="g-value window ")
+                ]), width = 6
         )
 
 
 input = html.Div([
-            uFacadeInput,
-            uRoofInput,
-            uFloorInput,
+            html.H4("Heat transfer coefficient (U-value) of opaque planes [W/(m²K)]"),
+            dbc.Row([
+                uFacadeInput,
+                uRoofInput,
+                uFloorInput
+            ]),
+            html.H4("Windows"),
+            dbc.Row([
+                uWindowInput,
+                gWindowInput,
+            ]),
             ]
 )
+
 
 
 output = html.Div("", id = "materials_output_id")
