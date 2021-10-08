@@ -21,7 +21,7 @@ location_tab_content = dbc.Card(
     dbc.CardBody([
         location_content,
         dbc.Button("Save", color="primary", id="location_done_button_id", n_clicks=0, disabled=True,
-            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+            style = {"position":"absolute", "top":"-3.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
     ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
@@ -29,7 +29,7 @@ occupancy_tab_content = dbc.Card(
     dbc.CardBody([
         occupancy_content,
         dbc.Button("Save", color="primary", id="occupancy_done_button_id", disabled=True,
-            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+            style = {"position":"absolute", "top":"-3.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
     ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
@@ -37,7 +37,7 @@ floorplan_tab_content = dbc.Card(
     dbc.CardBody([
         floorplan_content,
         dbc.Button("Save", color="primary", id="floorplan_done_button_id", disabled=True,
-            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+            style = {"position":"absolute", "top":"-3.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
     ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
@@ -45,7 +45,7 @@ geometry_tab_content = dbc.Card(
     dbc.CardBody([
         geometry_content,
         dbc.Button("Save", color="primary", id="geometry_done_button_id", disabled=True,
-            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+            style = {"position":"absolute", "top":"-3.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
     ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
@@ -53,7 +53,7 @@ materials_tab_content = dbc.Card(
     dbc.CardBody([
         materials_content,
         dbc.Button("Save", color="primary", id="materials_done_button_id", disabled=True,
-            style = {"position":"absolute", "top":"-2.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+            style = {"position":"absolute", "top":"-3.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
     ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
@@ -67,7 +67,7 @@ input_tabs = dbc.Tabs(
             ],
             id="input_tabs",
             active_tab="location_tab_id",
-            style={"border-bottom":"0", "padding-left":"1.25rem"}
+            style={"border-bottom":"0", "padding-left":"1.25rem", 'margin-bottom':'1rem'}
         )
 
 
@@ -91,7 +91,7 @@ output_tabs = dbc.Tabs(
             ],
             id="output_tabs",
             active_tab="weather_tab_id",
-            style={"border-bottom":"0", "padding-left":"1.25rem"}
+            style={"border-bottom":"0", "padding-left":"1.25rem", 'margin-bottom':'1rem'}
         )
 
 output_tabs_bar = dbc.Row(children= [
