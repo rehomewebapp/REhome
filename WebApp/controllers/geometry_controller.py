@@ -50,12 +50,12 @@ def inputDone(n_storys, story_height, area_win_a,area_win_b,area_win_c, area_win
         building = read_building_data_yaml(userID='userID')
         perimeter = building['perimeter']
         groundArea = building['groundArea']
-        
+
         heatedArea = groundArea * n_storys
         volume = groundArea * height
-        facadearea = geometry.facade_area(perimeter, height)
+        facadearea = geometry.facade_area(perimeter, height) - sum([area_win_a, area_win_b, area_win_c, area_win_d])
 
-        # TODO! calculate window area and subtract from facade area
+
         building['nStorys'] = n_storys
         building['thZones']['livingSpace']['storyHeight'] = story_height
         building['thZones']['livingSpace']['opaquePlanes']['facade']['area'] = facadearea
