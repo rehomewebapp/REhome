@@ -12,12 +12,16 @@ def create_bar_graph(df):
     months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
     data = df.groupby(pd.Grouper(freq='M')).sum()/1000
     data['Qflow_int'] = data['Qflow_int'] * -1
+    data['Qflow_sol'] = data['Qflow_sol'] * -1
     fig = go.Figure(data=[
         go.Bar(name='Internal gains', x=months, y=data['Qflow_int'], marker_color='rgb(255, 95, 45)'),
         go.Bar(name='Transmission ground', x=months, y=data['Qflow_trans_ground'], marker_color='rgb(100, 100, 100)'),
         go.Bar(name='Transmission facade', x=months, y=data['Qflow_trans_facade'], marker_color='rgb(150, 150, 150)'),
         go.Bar(name='Transmission roof', x=months, y=data['Qflow_trans_roof'], marker_color='rgb(200, 200, 200)'),
+        go.Bar(name='Transmission windows', x=months, y=data['Qflow_trans_windows'], marker_color='rgb(135, 135, 222)'),
         go.Bar(name='Ventilation', x=months, y=data['Qflow_vent'], marker_color='rgb(0, 100, 205)'),
+        go.Bar(name='Solar gains', x=months, y=data['Qflow_sol'], marker_color='rgb(255, 204, 0)'),
+        go.Scatter(name='Heat demand', x=months, y=data['heatDemand'], marker_color='rgb(255, 0, 0)')
     ])
     fig.update_xaxes(title_text='')
     fig.update_yaxes(title_text='Heat flows [kWh/month]')
