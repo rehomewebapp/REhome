@@ -173,7 +173,30 @@ def heatflow2Energy(heatflow, timestep):
 
 
 def heatFlows(building, weatherdata):
-    '''This function calculates the the different heatflows in the building'''
+    '''This function calculates the the different heatflows in the building
+    
+    Parameters
+    ----------
+    building: dict
+        dictionary containing building parameters created with buildingFactory (building.yaml)
+    
+    weatherdata: pandas dataframe
+        Dataframe containing weatherdata, can be created with utilities.read_tmy_data()
+
+    Returns
+    -------
+    pandas dataframe
+        Dataframe containing the following heatflows and heatdemand
+        df['Qflow_int']             Internal gains :math:`\dot{Q_{int}}~[W]
+        df['Qflow_sol']             Solar gains :math:`\dot{Q_{sol}}~[W]
+        df['Qflow_vent']            Ventilation losses :math:`\dot{Q_{vent}}~[W]
+        df['Qflow_trans_facade']    Transmission losses facade :math:`\dot{Q_{trans,facade}}~[W]
+        df['Qflow_trans_roof']      Transmission losses roof :math:`\dot{Q_{trans,roof}}~[W]
+        df['Qflow_trans_ground']    Transmission losses ground :math:`\dot{Q_{trans,ground}}~[W]
+        df['Qflow_trans_windows']   Transmission losses windows :math:`\dot{Q_{trans,windows}}~[W]
+        df['heatDemand']            Heat demand :math:`Q_{th}~[Wh]
+
+    '''
 
     # Extract relevant building information
     facadeArea = building['thZones']['livingSpace']['opaquePlanes']['facade']['area']
