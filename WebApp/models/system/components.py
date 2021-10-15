@@ -12,7 +12,7 @@ class Gasboiler():
         Calculate required fuel consumption to cover the remaining heating demand
 
     '''
-    def __init__(self, efficiency)
+    def __init__(self, efficiency):
         self.efficiency = efficiency
 
     def calc_used_fuel(self, power_actual): # power_actual [kW]
