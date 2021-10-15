@@ -14,8 +14,4 @@ def initBuilding(n_clicks):
     building = read_building_data_yaml('simpleBuilding')
     building['id'] = 'userID'
     save_building_data_yaml(building)
-    latitude = building['location']['latitude']
-    longitude = building['location']['longitude']
-    weather = get_tmy_data(latitude, longitude)
-    save_tmy_data(weather)
     return ""

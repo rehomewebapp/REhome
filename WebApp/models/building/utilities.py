@@ -22,7 +22,11 @@ def get_tmy_data(latitude, longitude):
     """
     url = 'https://re.jrc.ec.europa.eu/api/tmy?lat='+str(latitude)+'&lon='+str(longitude)+'&outputformat=json'
     response = requests.get(url)
-    return response.content
+    if response.status_code == 200:
+        return response.content
+    else:
+        return None
+
 
 def save_tmy_data(data, userID = "userID", filepath = data_path):
     """Save the weather data in a json file.
