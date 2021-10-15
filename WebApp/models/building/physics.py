@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime
 import pvlib
+from timezonefinder import TimezoneFinder
 
 #constant values
 DENSITYAIR = 1.25 # kg/m^3 density of air
@@ -192,10 +193,14 @@ def heatFlows(building, weatherdata):
     #TO DO: find good model for ground temperature
     tempGround = weatherdata['T2m'] * 0.5
 
+    # Get timezone from latitude and longitude
+    tf = TimezoneFinder()
+    tz = tf.timezone_at(lng=longitude, lat=latitude)
+
     # Calculate solar irradiance on windows
     location = pvlib.location.Location(latitude = latitude,
                                         longitude = longitude,
-                                        tz = 'Europe/Berlin', # !TODO get timezone from location
+                                        tz = tz, # !TODO get timezone from location
                                         )       
 
     solarposition = location.get_solarposition(times = index)
