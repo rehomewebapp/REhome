@@ -2,6 +2,7 @@ from dash.dependencies import Input, Output
 from app import app
 from dash.exceptions import PreventUpdate
 from models.building.buildingFactory import read_building_data_yaml, save_building_data_yaml
+from models.building.utilities import get_tmy_data, save_tmy_data
 
 @app.callback(
     Output("home_output_id","children"),
@@ -13,4 +14,8 @@ def initBuilding(n_clicks):
     building = read_building_data_yaml('simpleBuilding')
     building['id'] = 'userID'
     save_building_data_yaml(building)
+    latitude = building['location']['latitude']
+    longitude = building['location']['longitude']
+    weather = get_tmy_data(latitude, longitude)
+    save_tmy_data(weather)
     return ""
