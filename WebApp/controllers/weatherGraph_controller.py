@@ -35,6 +35,9 @@ def make_weather_graph(df):
     Input("update_graphs_button_id", "n_clicks"),
 )
 def update_weather_graph(n_clicks):
-    df = read_tmy_data()
+    if n_clicks == None:
+        df = read_tmy_data(userID='default')
+    else:
+        df = read_tmy_data()
     graph = make_weather_graph(df)
     return graph
