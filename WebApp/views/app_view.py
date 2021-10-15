@@ -11,9 +11,11 @@ from views.occupancy_view import content as occupancy_content
 from views.floorplan_view import content as floorplan_content
 from views.geometry_view import content as geometry_content
 from views.materials_view import content as materials_content
+from views.system_view import content as system_content
 
 from views.weather_view import content as weather_content
 from views.heatDemand_view import content as heatDemand_content
+from views.report_view import content as report_content
 
 #INPUT TABS
 
@@ -57,6 +59,14 @@ materials_tab_content = dbc.Card(
     ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
 )
 
+system_tab_content = dbc.Card(
+    dbc.CardBody([
+        system_content,
+        dbc.Button("Save", color="primary", id="system_done_button_id", disabled=True,
+            style = {"position":"absolute", "top":"-3.5rem", "right":"1.25rem", "padding-top":"0.5rem", "padding-bottom":"0.5rem"}),
+    ],style={"padding-top":"0px", "padding-bottom":"0px"}), style = {"border":"0", "margin-top":"0"}
+)
+
 input_tabs = dbc.Tabs(
             [
                 dbc.Tab( label="Location", tab_id="location_tab_id"),
@@ -64,6 +74,7 @@ input_tabs = dbc.Tabs(
                 dbc.Tab( label="Floorplan", tab_id="floorplan_tab_id"),
                 dbc.Tab( label="Geometry", tab_id="geometry_tab_id"),
                 dbc.Tab( label="Materials", tab_id="materials_tab_id"),
+                dbc.Tab( label="System", tab_id="system_tab_id"),
             ],
             id="input_tabs",
             active_tab="location_tab_id",
@@ -84,10 +95,17 @@ heatDemand_tab_content = dbc.Card(
         ],style={"padding-top":"0"}), style = {"border":"0"}
 )
 
+report_tab_content = dbc.Card(
+    dbc.CardBody([
+        report_content,
+        ],style={"padding-top":"0"}), style = {"border":"0"}
+)
+
 output_tabs = dbc.Tabs(
             [
                 dbc.Tab( label="Weather", tab_id="weather_tab_id"),
                 dbc.Tab( label="Heat demand", tab_id="heatDemand_tab_id"),
+                dbc.Tab( label="Report", tab_id="report_tab_id"),
             ],
             id="output_tabs",
             active_tab="weather_tab_id",
@@ -132,6 +150,8 @@ def switch_tab(at):
         return  geometry_tab_content
     elif at == "materials_tab_id":
         return  materials_tab_content
+    elif at == "system_tab_id":
+        return  system_tab_content
     return html.P("This shouldn't ever be displayed...")
 
 
@@ -144,5 +164,7 @@ def switch_tab(at):
         return  weather_tab_content
     elif at == "heatDemand_tab_id":
         return  heatDemand_tab_content
+    elif at == "report_tab_id":
+        return  report_tab_content
     return html.P("This shouldn't ever be displayed...")
 
